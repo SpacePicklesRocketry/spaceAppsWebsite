@@ -1,0 +1,32 @@
+/* Spinner Component Styles */
+.spinner {
+  display: inline-block;
+  position: relative;
+}
+
+.spinner-inner {
+  border: 3px solid var(--border-color);
+  border-top: 3px solid var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.spinner-sm .spinner-inner {
+  width: 20px;
+  height: 20px;
+}
+
+.spinner-md .spinner-inner {
+  width: 32px;
+  height: 32px;
+}
+
+.spinner-lg .spinner-inner {
+  width: 48px;
+  height: 48px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
