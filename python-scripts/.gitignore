@@ -1,0 +1,53 @@
+# Python Virtual Environments
+venv/
+env/
+.venv/
+.env/
+
+# Python Cache Files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.py[cod]
+*$py.class
+
+# IDE/Editor Files
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+*.sublime-project
+*.sublime-workspace
+
+# Distribution/Build Artifacts
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Output Files (for future visualization phase)
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.pdf
+*.svg
+
+# Environment Variables
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Logs
+*.log
+logs/
+
+# Temporary Files
+*.tmp
+*.temp
+.tmp/
+.temp/

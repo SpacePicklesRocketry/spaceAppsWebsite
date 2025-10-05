@@ -1,0 +1,5 @@
+sscws>=1.0.0
+numpy>=1.21.0
+python-dateutil>=2.8.0
+matplotlib>=3.5.0
+cartopy>=0.21.0
