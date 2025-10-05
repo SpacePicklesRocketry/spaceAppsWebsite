@@ -11,12 +11,13 @@ import ModuleCard from './components/ModuleCard';
 import ObstacleAvoidanceCard from './components/ObstacleAvoidanceCard';
 import ViewToggleCard from './components/ViewToggleCard';
 import SensorDataTable from './components/SensorDataTable';
+import SatelliteViewer from '../../../../components/SatelliteViewer';
 
 // Mock data shaped to the dashboard contract
 const mock = {
   mission: {
     id: 'MV-1',
-    name: 'Mission Volta (MV-1) Module Alpha - Astro',
+    name: 'Mission Volta (MV-1) Module Alpha - Voxel',
     startTime: '2025-09-30T12:00:00Z',
     endTime: '2025-10-07T12:00:00Z'
   },
@@ -41,7 +42,7 @@ const mock = {
   location: { lat: 37.7749, lon: -122.4194 }
 };
 
-function App() {
+function App({ userType = 'consumer' }) {
   // Apps Script Web App URL (doGet returns JSON stringified 2D array)
   // Replace with your deployed web app URL (ends with /exec)
   const SPREADSHEET_URL = 'https://script.google.com/macros/s/AKfycby4aXux4-5ZGWD4mWiCyYLtZtresjFkibkl4vG_dcgL_yFs7TkBj-8UvO9hQTPMQIgI/exec';
@@ -62,7 +63,7 @@ function App() {
   const [location, setLocation] = useState(mock.location);
   const [lastSync, setLastSync] = useState(null);
   const [isSyncing, setIsSyncing] = useState(false);
-  const [viewMode, setViewMode] = useState('consumer'); // 'consumer' or 'company'
+  const [viewMode, setViewMode] = useState(userType); // Use userType prop as initial value
 
   
   // Helper to parse array data from Google Sheets
@@ -332,7 +333,7 @@ function App() {
         </div>
         
         <div className="right-controls">
-          <ViewToggleCard viewMode={viewMode} onToggle={handleViewToggle} />
+          {/* <ViewToggleCard viewMode={viewMode} onToggle={handleViewToggle} /> */}
         </div>
       </div>
       {viewMode === 'consumer' ? (
@@ -352,6 +353,7 @@ function App() {
               <main className="main-column">
                 <div className="main-row">
                   <div className="right-widgets">
+                    <SatelliteViewer />
                     <MapWidget location={location} />
                     <CommunicationsPanel comms={communications} />
                     <UptimeWidget status={status} />

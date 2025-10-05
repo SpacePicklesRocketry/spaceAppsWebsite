@@ -228,14 +228,21 @@ h1 {
   text-align: center;
 }
 
+.header-title-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
 .header-left h1 {
   font-size: 1.75rem;
+  margin: 0;
 }
 
 .status-badge {
   display: inline-block;
   padding: 6px 10px;
-  margin-left: 12px;
   border-radius: 12px;
   font-weight: 700;
 }
@@ -870,6 +877,12 @@ h1 {
   .sensor-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* ===== SATELLITE VIEWER SECTION ===== */
+.satellite-viewer-section {
+  margin-top: 20px;
+  width: 100%;
 }
 
 /* ===== SENSOR DATA TABLE STYLES ===== */

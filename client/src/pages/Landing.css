@@ -41,6 +41,168 @@
 }
 
 /* ============================================
+   Manifesto Blurb Section
+   ============================================ */
+.manifesto-blurb-section {
+  padding: 6rem 0;
+  background: #000000;
+  color: #ffffff;
+  position: relative;
+  z-index: 1;
+}
+
+.manifesto-blurb-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 3rem;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+
+.manifesto-blurb-content {
+  max-width: 700px;
+  margin: 0 auto;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #ffffff;
+}
+
+.manifesto-blurb-content p {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.read-more-container {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.read-more-btn {
+  display: inline-block;
+  padding: 1rem 2rem;
+  background: transparent;
+  color: #06b6d4;
+  border: 2px solid #06b6d4;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.read-more-btn:hover {
+  background: #06b6d4;
+  color: #000000;
+  transform: translateY(-2px);
+}
+
+/* ============================================
+   Solution Section
+   ============================================ */
+.solution-section {
+  padding: 6rem 0;
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.3) 0%, rgba(0, 0, 0, 0.3) 100%);
+  border-top: 1px solid rgba(6, 182, 212, 0.08);
+  position: relative;
+}
+
+.solution-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #ffffff;
+}
+
+.solution-subtitle {
+  font-size: 1.2rem;
+  text-align: center;
+  margin-bottom: 4rem;
+  color: #94a3b8;
+}
+
+.solution-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.solution-text {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #ffffff;
+}
+
+.solution-text p {
+  margin-bottom: 1.5rem;
+}
+
+.explore-tech-btn {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 1rem 2rem;
+  background: #06b6d4;
+  color: #000000;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.explore-tech-btn:hover {
+  background: #0891b2;
+  transform: translateY(-2px);
+}
+
+.stl-preview-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.stl-preview-item {
+  background: rgba(15, 23, 42, 0.4);
+  border: 1px solid rgba(6, 182, 212, 0.2);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.stl-preview-item:hover {
+  border-color: #06b6d4;
+  transform: translateY(-4px);
+}
+
+.stl-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.stl-preview-item h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #ffffff;
+}
+
+.stl-preview-item p {
+  font-size: 0.9rem;
+  color: #94a3b8;
+  margin: 0;
+}
+
+.highlight {
+  color: #06b6d4;
+  font-weight: 600;
+}
+
+/* ============================================
    Professional Features Section
    ============================================ */
 .features-section {

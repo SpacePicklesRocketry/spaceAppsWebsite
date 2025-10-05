@@ -16,26 +16,28 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(circle at 20% 80%, rgba(6, 182, 212, 0.03) 0%, transparent 50%),
-              radial-gradient(circle at 80% 20%, rgba(6, 182, 212, 0.02) 0%, transparent 50%);
+  background: none;
   pointer-events: none;
   z-index: 0;
 }
+
 
 /* ============================================
    Professional Dashboard Header
    ============================================ */
 .dashboard-header {
-  background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(0, 0, 0, 0.95) 100%);
+  background: rgba(15, 23, 42, 0.4);
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
   color: white;
   text-align: center;
-  padding: 5rem 0 3rem;
-  margin-bottom: 0;
-  border-bottom: 1px solid rgba(6, 182, 212, 0.15);
-  backdrop-filter: blur(10px);
+  padding: 2rem;
+  max-width: 900px;
+  margin: 4rem auto 2rem;
   position: relative;
-  z-index: 1;
+  overflow: hidden;
 }
+
 
 .dashboard-header h1 {
   font-size: var(--font-size-4xl);
@@ -58,14 +60,125 @@
 }
 
 /* ============================================
+   Dashboard Selection Interface
+   ============================================ */
+.dashboard-selection {
+  padding: 2rem 0;
+  margin-top: 2rem;
+}
+
+.selection-content {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.selection-content h2 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #ffffff;
+}
+
+.selection-description {
+  font-size: 1rem;
+  color: #94a3b8;
+  margin-bottom: 2rem;
+}
+
+.access-buttons {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.access-btn {
+  background: rgba(15, 23, 42, 0.4);
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  padding: 1.5rem 3rem;
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 150px;
+}
+
+.access-btn:hover {
+  border-color: #06b6d4;
+  background: rgba(6, 182, 212, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(6, 182, 212, 0.2);
+}
+
+/* ============================================
+   Dashboard Header with Back Button
+   ============================================ */
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.header-text {
+  flex: 1;
+}
+
+.back-button {
+  background: transparent;
+  color: #06b6d4;
+  border: 1px solid rgba(6, 182, 212, 0.3);
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.back-button:hover {
+  background: rgba(6, 182, 212, 0.1);
+  border-color: #06b6d4;
+  transform: translateY(-2px);
+}
+
+/* ============================================
    Professional Dashboard Content
    ============================================ */
 .dashboard-content {
-  padding: 4rem 0;
-  max-width: 1400px;
-  margin: 0 auto;
+  padding: 0;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
   position: relative;
   z-index: 1;
+}
+
+/* ============================================
+   Dashboard Container
+   ============================================ */
+.dashboard-container {
+  width: 100%;
+  min-height: 80vh;
+  background: #000000;
+}
+
+.spaceapps-embed {
+  width: 100%;
+  height: 100%;
+  min-height: 80vh;
+}
+
+.spaceapps-embed .App {
+  padding: 0 !important;
+  min-height: auto !important;
+}
+
+.spaceapps-embed body {
+  background: linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #000000 100%) !important;
 }
 
 /* ============================================
@@ -215,6 +328,65 @@
   font-size: var(--font-size-base);
   color: var(--text-secondary);
   font-weight: 400;
+}
+
+/* ============================================
+   Dashboard Features Section
+   ============================================ */
+.dashboard-features {
+  padding: 4rem 0;
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.3) 0%, rgba(0, 0, 0, 0.3) 100%);
+  border-top: 1px solid rgba(6, 182, 212, 0.08);
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  position: relative;
+  z-index: 1;
+}
+
+.dashboard-features h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  text-rendering: optimizeLegibility;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.feature-item {
+  background: rgba(15, 23, 42, 0.4);
+  border: 1px solid rgba(6, 182, 212, 0.2);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.feature-item:hover {
+  border-color: #06b6d4;
+  transform: translateY(-4px);
+}
+
+.feature-item h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #ffffff;
+}
+
+.feature-item p {
+  font-size: 0.9rem;
+  color: #94a3b8;
+  margin: 0;
 }
 
 /* ============================================
@@ -368,7 +540,7 @@
    ============================================ */
 @media (max-width: 768px) {
   .dashboard-header {
-    padding: 3rem 0 2rem;
+    padding: 1.5rem;
   }
   
   .dashboard-header h1 {
@@ -409,11 +581,31 @@
     width: 100%;
     justify-content: center;
   }
+  
+  .access-buttons {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .access-btn {
+    padding: 1.25rem 2rem;
+    min-width: 200px;
+  }
+  
+  .header-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .back-button {
+    width: 100%;
+    max-width: 200px;
+  }
 }
 
 @media (max-width: 480px) {
   .dashboard-header {
-    padding: 2rem 0 1.5rem;
+    padding: 1.25rem;
   }
   
   .dashboard-header h1 {

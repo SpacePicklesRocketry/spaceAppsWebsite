@@ -3,7 +3,6 @@ import STLViewer from '../components/STLViewer';
 import './STLExplanation.css';
 
 const STLExplanation = () => {
-  const [viewMode, setViewMode] = useState('grid');
   const [expandedComponent, setExpandedComponent] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [showAnnotations, setShowAnnotations] = useState(false);
@@ -11,176 +10,120 @@ const STLExplanation = () => {
 
   const componentsData = [
     {
-      id: 'hub-main',
-      name: 'Main Hub Module',
-      modelPath: '/models/test.stl',
-      shortDescription: 'Central structural component that serves as the primary connection point for all satellite modules.',
-      detailedDescription: 'The Main Hub Module is the core structural element of the satellite hub system. It provides the primary mounting interface for all other components and houses critical systems including the central processing unit, power distribution nodes, and primary data bus connections. The module is designed with redundant connection points to ensure system reliability and modularity.',
+      id: 'connector',
+      name: 'Modular Connector',
+      modelPath: '/models/Connector.stl',
+      shortDescription: 'High-precision modular connector system enabling seamless integration between satellite components.',
+      detailedDescription: 'The Modular Connector is a precision-engineered interface system that enables rapid assembly and disassembly of satellite modules. It features self-aligning mechanisms, redundant electrical connections, and data transfer capabilities, ensuring reliable operation in the harsh space environment.',
       technicalSpecs: {
-        dimensions: '2.5m × 2.5m × 1.8m',
-        mass: '450 kg',
-        materials: 'Titanium alloy, Carbon fiber composite',
-        operationalTemp: '-40°C to +85°C',
-        powerConsumption: '2.5 kW',
-        connectionPoints: '12 modular interfaces'
+        dimensions: '0.8m × 0.8m × 0.4m',
+        mass: '45 kg',
+        materials: 'Titanium alloy, Gold-plated contacts, Composite housing',
+        operationalTemp: '-50°C to +85°C',
+        powerConsumption: '0.1 kW',
+        connectionPoints: '24 electrical + 8 data channels'
       },
       features: [
-        'Modular interface system',
-        'Redundant power distribution',
-        'Central data processing',
-        'Thermal management system',
-        'Radiation shielding'
+        'Self-aligning mechanism',
+        'Redundant electrical paths',
+        'High-speed data transfer',
+        'Quick-release capability',
+        'Space-grade materials'
       ],
       annotations: [
-        { position: { x: 30, y: 25 }, label: 'Power Distribution' },
-        { position: { x: 70, y: 40 }, label: 'Data Bus Interface' },
-        { position: { x: 50, y: 60 }, label: 'Modular Mounting' }
+        { position: { x: 30, y: 25 }, label: 'Alignment Pins' },
+        { position: { x: 70, y: 40 }, label: 'Power Contacts' },
+        { position: { x: 50, y: 60 }, label: 'Data Interface' }
       ],
-      category: 'Structure'
+      category: 'Systems'
     },
     {
-      id: 'thermal-shield',
-      name: 'test',
-      modelPath: '/models/test.stl',
-      shortDescription: 'Advanced thermal management system providing temperature regulation and heat dissipation.',
-      detailedDescription: 'The Thermal Protection System employs multi-layer insulation, heat pipes, and active cooling mechanisms to maintain optimal operating temperatures for all satellite components. It features adaptive thermal control that responds to varying solar exposure and internal heat generation.',
+      id: 'gimbal',
+      name: 'Precision Gimbal',
+      modelPath: '/models/Gimball.stl',
+      shortDescription: 'Advanced gimbal system providing precise orientation control for antennas and instruments.',
+      detailedDescription: 'The Precision Gimbal System offers multi-axis orientation control with sub-degree accuracy. It enables precise pointing of antennas, cameras, and scientific instruments, ensuring optimal performance for communication and data collection missions.',
       technicalSpecs: {
-        dimensions: '3.0m × 3.0m × 0.3m',
-        mass: '180 kg',
-        materials: 'Multi-layer insulation, Heat pipes, Radiator panels',
-        operationalTemp: '-60°C to +120°C',
+        dimensions: '1.2m × 1.2m × 0.6m',
+        mass: '85 kg',
+        materials: 'Aluminum alloy, Precision bearings, Stepper motors',
+        operationalTemp: '-40°C to +70°C',
         powerConsumption: '0.8 kW',
-        heatDissipation: '5.2 kW'
+        pointingAccuracy: '±0.1° in all axes'
       },
       features: [
-        'Multi-layer insulation',
-        'Active cooling system',
-        'Heat pipe technology',
-        'Adaptive thermal control',
-        'Solar radiation protection'
+        'Multi-axis control',
+        'Sub-degree accuracy',
+        'High torque capability',
+        'Smooth operation',
+        'Redundant drive systems'
       ],
       annotations: [
-        { position: { x: 20, y: 30 }, label: 'Insulation Layers' },
-        { position: { x: 80, y: 50 }, label: 'Heat Pipes' },
-        { position: { x: 50, y: 20 }, label: 'Radiator Panels' }
+        { position: { x: 25, y: 30 }, label: 'Azimuth Motor' },
+        { position: { x: 75, y: 50 }, label: 'Elevation Drive' },
+        { position: { x: 50, y: 70 }, label: 'Control Electronics' }
       ],
-      category: 'Protection'
+      category: 'Systems'
     },
     {
-      id: 'debris-shield',
-      name: 'test',
-      modelPath: '/models/test.stl',
-      shortDescription: 'Protective barrier system designed to shield critical components from space debris and micrometeorites.',
-      detailedDescription: 'The Debris Shield Module provides comprehensive protection against space debris, micrometeorites, and other orbital hazards. It uses advanced composite materials and multi-layer shielding technology to absorb and deflect impacts while maintaining structural integrity.',
+      id: 'port',
+      name: 'Docking Port',
+      modelPath: '/models/Port.stl',
+      shortDescription: 'Automated docking port system for spacecraft rendezvous and module attachment.',
+      detailedDescription: 'The Docking Port System enables automated spacecraft rendezvous and docking operations. It features precision guidance systems, secure capture mechanisms, and integrated power/data transfer capabilities for visiting spacecraft and additional modules.',
       technicalSpecs: {
-        dimensions: '4.0m × 4.0m × 0.5m',
-        mass: '320 kg',
-        materials: 'Kevlar composite, Aluminum honeycomb, Ceramic tiles',
-        operationalTemp: '-50°C to +100°C',
-        powerConsumption: '0.2 kW',
-        impactResistance: 'Up to 1cm debris at 10km/s'
+        dimensions: '2.0m × 2.0m × 1.5m',
+        mass: '180 kg',
+        materials: 'Stainless steel, Composite panels, Precision actuators',
+        operationalTemp: '-30°C to +80°C',
+        powerConsumption: '2.2 kW',
+        dockingAccuracy: '±5mm capture range'
       },
       features: [
-        'Multi-layer impact protection',
-        'Self-healing composite materials',
-        'Modular panel system',
-        'Impact detection sensors',
-        'Automatic damage assessment'
+        'Automated guidance system',
+        'Secure capture mechanism',
+        'Power transfer capability',
+        'Data interface',
+        'Emergency release system'
       ],
       annotations: [
-        { position: { x: 25, y: 40 }, label: 'Impact Sensors' },
-        { position: { x: 75, y: 30 }, label: 'Composite Layers' },
-        { position: { x: 50, y: 70 }, label: 'Honeycomb Core' }
-      ],
-      category: 'Protection'
-    },
-    {
-      id: 'docking-mechanism',
-      name: 'test',
-      modelPath: '/models/test.stl',
-      shortDescription: 'Automated docking and attachment system for connecting additional modules and spacecraft.',
-      detailedDescription: 'The Docking Mechanism enables automated connection and disconnection of modules and visiting spacecraft. It features precision alignment systems, secure locking mechanisms, and data/power transfer interfaces for seamless integration.',
-      technicalSpecs: {
-        dimensions: '1.8m × 1.8m × 1.2m',
-        mass: '280 kg',
-        materials: 'Stainless steel, Precision actuators, Composite housing',
-        operationalTemp: '-30°C to +70°C',
-        powerConsumption: '1.5 kW',
-        dockingAccuracy: '±2mm alignment'
-      },
-      features: [
-        'Precision alignment system',
-        'Automated locking mechanism',
-        'Data transfer interface',
-        'Power connection system',
-        'Emergency release capability'
-      ],
-      annotations: [
-        { position: { x: 40, y: 30 }, label: 'Alignment Sensors' },
-        { position: { x: 60, y: 60 }, label: 'Locking Mechanism' },
+        { position: { x: 40, y: 30 }, label: 'Guidance Sensors' },
+        { position: { x: 60, y: 60 }, label: 'Capture Mechanism' },
         { position: { x: 30, y: 70 }, label: 'Power Interface' }
       ],
       category: 'Systems'
     },
     {
-      id: 'communication-array',
-      name: 'test',
+      id: 'hub-core',
+      name: 'Hub Core Module',
       modelPath: '/models/test.stl',
-      shortDescription: 'High-gain antenna system providing Earth communication and inter-satellite networking capabilities.',
-      detailedDescription: 'The Communication Array features multiple high-gain antennas operating across different frequency bands. It provides reliable Earth communication, inter-satellite networking, and data relay capabilities with adaptive beamforming technology.',
+      shortDescription: 'Central processing and control unit managing all satellite hub operations.',
+      detailedDescription: 'The Hub Core Module serves as the central nervous system of the satellite hub. It houses the main computer systems, power distribution units, and communication interfaces, coordinating all operations and ensuring system reliability through redundant systems.',
       technicalSpecs: {
-        dimensions: '2.2m × 2.2m × 0.8m',
-        mass: '195 kg',
-        materials: 'Carbon fiber, Gold-plated antennas, RF electronics',
-        operationalTemp: '-40°C to +80°C',
-        powerConsumption: '3.2 kW',
-        frequencyRange: 'S-band, X-band, Ka-band'
+        dimensions: '2.5m × 2.5m × 1.8m',
+        mass: '450 kg',
+        materials: 'Titanium alloy, Carbon fiber composite, Radiation shielding',
+        operationalTemp: '-40°C to +85°C',
+        powerConsumption: '2.5 kW',
+        processingPower: 'Dual redundant processors'
       },
       features: [
-        'Multi-band operation',
-        'Adaptive beamforming',
-        'High data rate capability',
-        'Inter-satellite networking',
-        'Automatic tracking system'
+        'Central processing unit',
+        'Power distribution system',
+        'Communication hub',
+        'Thermal management',
+        'Radiation protection'
       ],
       annotations: [
-        { position: { x: 30, y: 25 }, label: 'S-Band Antenna' },
-        { position: { x: 70, y: 35 }, label: 'X-Band Array' },
-        { position: { x: 50, y: 65 }, label: 'Ka-Band Dish' }
+        { position: { x: 30, y: 25 }, label: 'Main Processor' },
+        { position: { x: 70, y: 40 }, label: 'Power Distribution' },
+        { position: { x: 50, y: 60 }, label: 'Comm Interface' }
       ],
-      category: 'Communication'
-    },
-    {
-      id: 'power-distribution',
-      name: 'test',
-      modelPath: '/models/test.stl',
-      shortDescription: 'Centralized power management system distributing electrical power to all satellite components.',
-      detailedDescription: 'The Power Distribution Unit manages electrical power from solar arrays and batteries, providing regulated power distribution to all satellite systems. It includes fault protection, power monitoring, and load balancing capabilities.',
-      technicalSpecs: {
-        dimensions: '1.5m × 1.5m × 0.6m',
-        mass: '120 kg',
-        materials: 'Aluminum housing, Copper bus bars, Silicon electronics',
-        operationalTemp: '-20°C to +60°C',
-        powerConsumption: '0.5 kW',
-        powerCapacity: '15 kW total distribution'
-      },
-      features: [
-        'Intelligent load balancing',
-        'Fault protection systems',
-        'Power monitoring',
-        'Battery management',
-        'Solar array control'
-      ],
-      annotations: [
-        { position: { x: 35, y: 40 }, label: 'Power Bus' },
-        { position: { x: 65, y: 30 }, label: 'Fault Protection' },
-        { position: { x: 50, y: 70 }, label: 'Battery Interface' }
-      ],
-      category: 'Systems'
+      category: 'Structure'
     }
   ];
 
-  const categories = ['all', 'Structure', 'Protection', 'Systems', 'Communication'];
+  const categories = ['all', 'Structure', 'Systems'];
   
   const filteredComponents = selectedCategory === 'all' 
     ? componentsData 
@@ -188,6 +131,18 @@ const STLExplanation = () => {
 
   const handleComponentExpand = (componentId) => {
     setExpandedComponent(expandedComponent === componentId ? null : componentId);
+  };
+
+  const toggleSelection = (componentId) => {
+    setSelectedIds(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(componentId)) {
+        newSet.delete(componentId);
+      } else {
+        newSet.add(componentId);
+      }
+      return newSet;
+    });
   };
 
   const scrollToComparison = () => {
@@ -207,24 +162,73 @@ const STLExplanation = () => {
     </div>
   );
 
-  const renderComponentCard = (component) => (
-    <div
-      key={component.id}
-      className={`component-card ${expandedComponent === component.id ? 'expanded' : ''}`}
-    >
-      <div className="component-viewer">
-        <STLViewer
-          modelPath={component.modelPath}
-          autoRotate={expandedComponent === component.id}
-          scale={0.015}
-          cameraPosition={[5, 10, 7]}
-          fov={50}
-          autoRotateSpeed={0.8}
-          color="#06b6d4"
-          metalness={0.4}
-          roughness={0.3}
-          className="component-canvas"
-        />
+  const renderComponentCard = (component) => {
+    // Different settings based on component
+    const getComponentSettings = (id) => {
+      switch(id) {
+        case 'connector':
+          return { 
+            scale: 0.1, 
+            cameraPosition: [0, 0, 50], 
+            color: "#ff6b6b",
+            metalness: 0.6,
+            roughness: 0.3
+          };
+        case 'gimbal':
+          return { 
+            scale: 1.0, 
+            cameraPosition: [60, 60, 60], 
+            color: "#4ecdc4",
+            metalness: 0.4,
+            roughness: 0.4
+          };
+        case 'port':
+          return { 
+            scale: 0.6, 
+            cameraPosition: [70, 70, 70], 
+            color: "#45b7d1",
+            metalness: 0.5,
+            roughness: 0.3
+          };
+        case 'hub-core':
+          return { 
+            scale: 0.4, 
+            cameraPosition: [80, 80, 80], 
+            color: "#9b59b6",
+            metalness: 0.7,
+            roughness: 0.2
+          };
+        default:
+          return { 
+            scale: 0.1, 
+            cameraPosition: [2, 2, 2], 
+            color: "#06b6d4",
+            metalness: 0.4,
+            roughness: 0.3
+          };
+      }
+    };
+    
+    const settings = getComponentSettings(component.id);
+    
+    return (
+      <div
+        key={component.id}
+        className={`component-card ${expandedComponent === component.id ? 'expanded' : ''}`}
+      >
+        <div className="component-viewer">
+          <STLViewer
+            modelPath={component.modelPath}
+            autoRotate={expandedComponent === component.id}
+            scale={settings.scale}
+            cameraPosition={settings.cameraPosition}
+            fov={50}
+            autoRotateSpeed={0.8}
+            color={settings.color}
+            metalness={settings.metalness}
+            roughness={settings.roughness}
+            className="component-canvas"
+          />
         {showAnnotations && (
           <div className="annotations-container">
             {component.annotations.map((annotation, index) => renderAnnotation(annotation, index))}
@@ -291,34 +295,20 @@ const STLExplanation = () => {
         </div>
       )}
     </div>
-  );
+    );
+  };
 
   return (
     <div className="stl-explanation-page">
       <div className="page-header">
-        <h1>Satellite Hub Components</h1>
+        <h1>Voxel Space Components</h1>
         <p className="page-subtitle">
-          Explore the advanced modular components that make up our satellite hub system. 
+          Explore the advanced modular components that make up our Voxel Space satellite hub system. 
           Each component is designed for maximum efficiency, reliability, and interoperability.
         </p>
       </div>
 
       <div className="page-controls">
-        <div className="view-mode-toggle">
-          <button
-            className={viewMode === 'grid' ? 'active' : ''}
-            onClick={() => setViewMode('grid')}
-          >
-            <span className="icon">⊞</span> Grid
-          </button>
-          <button
-            className={viewMode === 'list' ? 'active' : ''}
-            onClick={() => setViewMode('list')}
-          >
-            <span className="icon">☰</span> List
-          </button>
-        </div>
-
         <div className="category-filters">
           {categories.map(category => (
             <button
@@ -360,7 +350,7 @@ const STLExplanation = () => {
 
       <div className="components-gallery">
         {filteredComponents.length > 0 ? (
-          <div className={`components-grid ${viewMode === 'list' ? 'components-list' : ''}`}>
+          <div className="components-grid">
             {filteredComponents.map(renderComponentCard)}
           </div>
         ) : (

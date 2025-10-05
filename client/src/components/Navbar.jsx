@@ -25,7 +25,7 @@ const Navbar = () => {
         <div className="container">
           <div className="navbar-content">
             <Link to="/" className="navbar-logo">
-              LEO Satellite Hub
+              Voxel Space
             </Link>
             
             <div className={`navbar-links ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
@@ -34,7 +34,6 @@ const Navbar = () => {
               <Link to="/technology" className="navbar-link" onClick={() => setIsMobileMenuOpen(false)}>Technology</Link>
               <Link to="/dashboard" className="navbar-link" onClick={() => setIsMobileMenuOpen(false)}>Dashboard</Link>
               <Link to="/contact" className="navbar-link" onClick={() => setIsMobileMenuOpen(false)}>Contact</Link>
-              <Link to="/faq" className="navbar-link" onClick={() => setIsMobileMenuOpen(false)}>FAQ</Link>
             </div>
             
             <button 

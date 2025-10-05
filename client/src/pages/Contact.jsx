@@ -29,7 +29,7 @@ const Contact = () => {
         <header className="contact-header">
           <h1>Contact Us</h1>
           <p>
-            Get in touch with our team for questions about LEO Satellite Hub
+            [CONTACT CONTENT PLACEHOLDER]
           </p>
         </header>
         
@@ -93,24 +93,7 @@ const Contact = () => {
           <section className="contact-info-section">
             <h2>Get in Touch</h2>
             <div>
-              <div className="contact-item">
-                <h3>Email</h3>
-                <p>info@leosatellithub.com</p>
-              </div>
-              
-              <div className="contact-item">
-                <h3>Phone</h3>
-                <p>(555) 123-4567</p>
-              </div>
-              
-              <div className="contact-item">
-                <h3>Address</h3>
-                <p>
-                  123 Space Avenue<br />
-                  Tech City, TC 12345<br />
-                  United States
-                </p>
-              </div>
+              [CONTACT INFO PLACEHOLDER]
             </div>
           </section>
         </div>

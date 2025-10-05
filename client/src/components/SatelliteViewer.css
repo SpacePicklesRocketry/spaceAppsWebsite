@@ -1,0 +1,124 @@
+.satellite-viewer-container {
+  background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+  color: #ffffff;
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 0 18px 50px rgba(2,6,23,0.75);
+  border: 1px solid rgba(255,255,255,0.10);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.satellite-viewer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.satellite-viewer-header h3 {
+  color: #ffffff;
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.satellite-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+.view-mode-toggle {
+  display: flex;
+  gap: 4px;
+}
+
+.view-mode-toggle button {
+  padding: 6px 12px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.05);
+  color: #cfe9ff;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.view-mode-toggle button:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.3);
+}
+
+.view-mode-toggle button.active {
+  background: rgba(96,165,250,0.2);
+  border-color: rgba(96,165,250,0.5);
+  color: #ffffff;
+}
+
+.satellite-stats {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  color: #cfe9ff;
+}
+
+.satellite-viewer-canvas {
+  flex: 1;
+  min-height: 250px;
+  max-height: 400px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.satellite-legend {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: #cfe9ff;
+}
+
+.legend-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.3);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .satellite-viewer-header {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  
+  .satellite-stats {
+    font-size: 0.75rem;
+  }
+  
+  .satellite-legend {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  
+  .satellite-viewer-canvas {
+    min-height: 250px;
+  }
+}

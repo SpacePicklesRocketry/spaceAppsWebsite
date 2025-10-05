@@ -142,8 +142,8 @@ function STLViewer({
       }
     }
 
-    // Initial resize with delay to ensure DOM is ready
-    setTimeout(handleResize, 100)
+    // Immediate resize to prevent layout shift
+    handleResize()
     
     // Add resize listener
     window.addEventListener('resize', handleResize)
@@ -155,14 +155,16 @@ function STLViewer({
     <Canvas
       ref={canvasRef}
       camera={{ position: cameraPosition, fov: fov }}
-      className={className}
+      className={`stl-viewer-canvas ${className}`}
       shadows
       dpr={[1, 1.5]}
       style={{ 
         background: '#000000',
         width: '100%',
         height: '100%',
-        display: 'block'
+        display: 'block',
+        minWidth: '100vw',
+        minHeight: '100vh'
       }}
       gl={{ 
         antialias: true,
