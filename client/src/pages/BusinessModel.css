@@ -1,250 +1,380 @@
-/* Business Model Page Styles */
+/* Elegant Business Model Page Styling - Refined Space Theme */
 
-/* Page container */
+/* ============================================
+   Page Container & Layout
+   ============================================ */
 .business-model-page {
   min-height: 100vh;
-  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  background: #000000;
+  position: relative;
+  overflow-x: hidden;
 }
 
-/* Page header */
+.business-model-page::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 25% 25%, rgba(6, 182, 212, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(6, 182, 212, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(15, 23, 42, 0.3) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ============================================
+   Elegant Page Header
+   ============================================ */
 .page-header {
   text-align: center;
-  padding: 4rem 0 2rem;
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+  padding: 6rem 2rem 4rem;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(15, 23, 42, 0.1) 100%);
   color: white;
   margin-bottom: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.page-header::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.2), transparent);
 }
 
 .page-header h1 {
-  font-size: var(--font-size-4xl);
-  font-weight: 700;
-  margin-bottom: 1rem;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 300;
+  margin-bottom: 2rem;
+  color: #ffffff;
+  letter-spacing: -0.03em;
+  text-rendering: optimizeLegibility;
+  background: linear-gradient(135deg, #ffffff 0%, #06b6d4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .page-subtitle {
-  font-size: var(--font-size-xl);
-  opacity: 0.9;
-  max-width: 600px;
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  opacity: 0.85;
+  max-width: 800px;
   margin: 0 auto;
   line-height: 1.6;
+  color: #cbd5e1;
+  font-weight: 300;
+  text-rendering: optimizeLegibility;
 }
 
-/* Section base styles */
+/* ============================================
+   Refined Content Sections
+   ============================================ */
 .problem-section,
 .solution-section,
+.business-model-section,
 .pricing-section,
-.future-section,
-.business-model-section {
-  padding: 4rem 0;
-  max-width: 1200px;
-  margin: 0 auto;
+.future-section {
+  padding: 6rem 2rem;
+  position: relative;
+  z-index: 1;
 }
 
-.problem-section,
-.future-section,
-.business-model-section {
-  background: white;
+.problem-section {
+  background: transparent;
 }
 
-.solution-section,
+.solution-section {
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.1) 0%, rgba(0, 0, 0, 0.2) 100%);
+}
+
+.business-model-section {
+  background: transparent;
+}
+
 .pricing-section {
-  background: var(--surface-color);
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.1) 0%, rgba(0, 0, 0, 0.2) 100%);
+}
+
+.future-section {
+  background: transparent;
+}
+
+/* ============================================
+   Elegant Section Headers
+   ============================================ */
+.problem-section h2,
+.solution-section h2,
+.business-model-section h2,
+.pricing-section h2,
+.future-section h2 {
+  text-align: center;
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom: 3rem;
+  color: #ffffff;
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  text-rendering: optimizeLegibility;
+  position: relative;
+}
+
+.problem-section h2::after,
+.solution-section h2::after,
+.business-model-section h2::after,
+.pricing-section h2::after,
+.future-section h2::after {
+  content: '';
+  position: absolute;
+  bottom: -1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #06b6d4, transparent);
 }
 
 .section-intro {
   text-align: center;
-  font-size: var(--font-size-lg);
-  color: var(--text-secondary);
-  margin-bottom: 3rem;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: #94a3b8;
+  max-width: 900px;
+  margin: 0 auto 4rem;
   line-height: 1.7;
+  font-weight: 300;
+  text-rendering: optimizeLegibility;
 }
 
-/* Problem and Solution grids */
+/* ============================================
+   Sophisticated Card Grids
+   ============================================ */
 .problem-grid,
-.solution-grid {
+.solution-grid,
+.business-model-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: var(--spacing-xl);
-  margin-top: 3rem;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 2.5rem;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
+/* ============================================
+   Refined Elegant Cards
+   ============================================ */
 .problem-card,
-.solution-card {
-  background: white;
-  padding: var(--spacing-xl);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-  transition: all 0.3s ease;
-  border: 1px solid var(--border-color);
+.solution-card,
+.business-model-card {
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(20px);
+  padding: 3rem 2.5rem;
+  border-radius: 24px;
+  border: 1px solid rgba(6, 182, 212, 0.1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.problem-card::before,
+.solution-card::before,
+.business-model-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.3), transparent);
 }
 
 .problem-card:hover,
-.solution-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-md);
+.solution-card:hover,
+.business-model-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(6, 182, 212, 0.2);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(6, 182, 212, 0.05);
+  background: rgba(15, 23, 42, 0.5);
 }
 
-.problem-card h3,
-.solution-card h3 {
-  font-size: var(--font-size-xl);
-  margin-bottom: var(--spacing-md);
-  color: var(--primary-color);
-}
-
-.problem-card p,
-.solution-card p {
-  color: var(--text-secondary);
-  line-height: 1.6;
-}
-
-/* Icon wrapper */
+/* ============================================
+   Elegant Icons
+   ============================================ */
 .icon-wrapper {
   width: 64px;
   height: 64px;
-  background: var(--primary-color);
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, rgba(6, 182, 212, 0.05) 100%);
+  border: 1px solid rgba(6, 182, 212, 0.2);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto var(--spacing-lg);
-  color: white;
-  font-size: 24px;
-  transition: all 0.3s ease;
+  margin: 0 auto 2rem;
+  font-size: 1.5rem;
+  color: #06b6d4;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .problem-card:hover .icon-wrapper,
-.solution-card:hover .icon-wrapper {
-  background: var(--accent-color);
+.solution-card:hover .icon-wrapper,
+.business-model-card:hover .icon-wrapper {
   transform: scale(1.1);
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.2) 0%, rgba(6, 182, 212, 0.1) 100%);
+  border-color: rgba(6, 182, 212, 0.3);
+  box-shadow: 0 8px 24px rgba(6, 182, 212, 0.15);
 }
 
-/* Business Model section styles */
-.business-model-content {
-  margin-top: 3rem;
-}
-
-.business-model-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: var(--spacing-xl);
-}
-
-.business-model-card {
-  background: white;
-  padding: var(--spacing-xl);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-  transition: all 0.3s ease;
-  border: 1px solid var(--border-color);
-  text-align: left;
-}
-
-.business-model-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-md);
-}
-
+/* ============================================
+   Refined Card Content
+   ============================================ */
+.problem-card h3,
+.solution-card h3,
 .business-model-card h3 {
-  font-size: var(--font-size-xl);
-  margin-bottom: var(--spacing-md);
-  color: var(--primary-color);
+  font-size: clamp(1.2rem, 2.5vw, 1.4rem);
+  margin-bottom: 1.5rem;
+  color: #ffffff;
+  font-weight: 400;
+  text-rendering: optimizeLegibility;
+  letter-spacing: -0.01em;
+}
+
+.problem-card p,
+.solution-card p,
+.business-model-card p {
+  color: #94a3b8;
+  line-height: 1.7;
+  font-weight: 300;
+  font-size: 1rem;
 }
 
 .business-model-card ul {
+  text-align: left;
+  color: #94a3b8;
+  line-height: 1.7;
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
 .business-model-card li {
-  padding: var(--spacing-sm) 0;
-  color: var(--text-secondary);
-  line-height: 1.6;
+  margin-bottom: 1rem;
   position: relative;
-  padding-left: var(--spacing-lg);
+  padding-left: 2rem;
+  font-weight: 300;
 }
 
 .business-model-card li::before {
-  content: '•';
-  color: var(--accent-color);
-  font-weight: bold;
+  content: '→';
   position: absolute;
   left: 0;
+  color: #06b6d4;
+  font-weight: 400;
+  font-size: 1.1rem;
 }
 
-/* Architecture diagram styles */
+/* ============================================
+   Sophisticated Architecture Diagram
+   ============================================ */
 .architecture-diagram {
-  margin-top: 3rem;
+  max-width: 900px;
+  margin: 4rem auto;
   text-align: center;
 }
 
 .architecture-diagram h3 {
-  font-size: var(--font-size-2xl);
-  color: var(--primary-color);
-  margin-bottom: var(--spacing-lg);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  margin-bottom: 2.5rem;
+  color: #ffffff;
+  font-weight: 300;
+  text-rendering: optimizeLegibility;
 }
 
 .diagram {
-  max-width: 600px;
-  margin: 0 auto var(--spacing-lg);
-  background: white;
-  padding: var(--spacing-lg);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-  border: 1px solid var(--border-color);
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(20px);
+  padding: 3rem;
+  border-radius: 24px;
+  border: 1px solid rgba(6, 182, 212, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.diagram:hover {
+  transform: translateY(-4px);
+  border-color: rgba(6, 182, 212, 0.2);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
 }
 
 .diagram-svg {
   width: 100%;
   height: auto;
-  display: block;
+  max-width: 700px;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.1));
 }
 
 .diagram-caption {
-  font-size: var(--font-size-sm);
-  color: var(--text-secondary);
+  margin-top: 2rem;
+  color: #94a3b8;
   font-style: italic;
-  line-height: 1.5;
-  max-width: 500px;
-  margin: 0 auto;
+  font-size: 0.95rem;
+  font-weight: 300;
 }
 
-/* Pricing section */
+/* ============================================
+   Elegant Pricing Section
+   ============================================ */
 .pricing-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: var(--spacing-xl);
-  margin-top: 3rem;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 2.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
 .pricing-card {
-  background: white;
-  border: 2px solid var(--border-color);
-  border-radius: var(--radius-lg);
-  padding: var(--spacing-2xl);
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(20px);
+  padding: 3rem 2.5rem;
+  border-radius: 24px;
+  border: 1px solid rgba(6, 182, 212, 0.1);
   text-align: center;
   position: relative;
-  transition: all 0.3s ease;
-  box-shadow: var(--shadow-sm);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.pricing-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.3), transparent);
 }
 
 .pricing-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-lg);
+  transform: translateY(-8px);
+  border-color: rgba(6, 182, 212, 0.2);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(6, 182, 212, 0.05);
 }
 
 .pricing-card.featured {
-  border-color: var(--primary-color);
-  transform: scale(1.05);
+  border-color: rgba(6, 182, 212, 0.3);
+  transform: scale(1.02);
+  box-shadow: 0 12px 40px rgba(6, 182, 212, 0.1);
 }
 
 .pricing-card.featured:hover {
-  transform: scale(1.05) translateY(-5px);
+  transform: scale(1.02) translateY(-8px);
+  box-shadow: 0 24px 70px rgba(6, 182, 212, 0.15), 0 0 0 1px rgba(6, 182, 212, 0.1);
 }
 
 .pricing-badge {
@@ -252,205 +382,242 @@
   top: -12px;
   left: 50%;
   transform: translateX(-50%);
-  background: var(--primary-color);
+  background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
   color: white;
-  padding: var(--spacing-xs) var(--spacing-md);
-  border-radius: var(--radius-md);
-  font-size: var(--font-size-sm);
-  font-weight: 600;
+  padding: 0.5rem 1.5rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  box-shadow: 0 4px 16px rgba(6, 182, 212, 0.3);
 }
 
 .pricing-tier-name {
-  font-size: var(--font-size-2xl);
-  font-weight: 700;
-  color: var(--primary-color);
-  margin-bottom: var(--spacing-sm);
+  font-size: clamp(1.2rem, 2.5vw, 1.4rem);
+  font-weight: 400;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  text-rendering: optimizeLegibility;
 }
 
 .pricing-amount {
-  font-size: var(--font-size-4xl);
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: var(--spacing-xs);
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 200;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+  text-rendering: optimizeLegibility;
+  letter-spacing: -0.02em;
 }
 
 .pricing-period {
-  color: var(--text-secondary);
-  font-size: var(--font-size-base);
-  margin-bottom: var(--spacing-lg);
+  color: #94a3b8;
+  margin-bottom: 2.5rem;
+  font-weight: 300;
 }
 
 .pricing-features {
   list-style: none;
   padding: 0;
-  margin: 0 0 var(--spacing-xl) 0;
+  margin-bottom: 2.5rem;
   text-align: left;
 }
 
 .pricing-features li {
-  padding: var(--spacing-sm) 0;
-  color: var(--text-secondary);
+  padding: 1rem 0;
+  color: #94a3b8;
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
+  gap: 1rem;
+  font-weight: 300;
+  border-bottom: 1px solid rgba(6, 182, 212, 0.05);
 }
 
-.pricing-features li svg {
-  color: var(--accent-color);
-  font-size: 16px;
+.pricing-features li:last-child {
+  border-bottom: none;
+}
+
+.pricing-features svg {
+  color: #06b6d4;
   flex-shrink: 0;
+  font-size: 1.1rem;
 }
 
 .pricing-cta {
+  display: inline-block;
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, rgba(6, 182, 212, 0.05) 100%);
+  color: #06b6d4;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   width: 100%;
-  padding: var(--spacing-md) var(--spacing-lg);
-  background: var(--primary-color);
-  color: white;
-  border: none;
-  border-radius: var(--radius-md);
-  font-size: var(--font-size-base);
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  border: 1px solid rgba(6, 182, 212, 0.2);
+  font-size: 1rem;
 }
 
 .pricing-cta:hover {
-  background: var(--accent-color);
+  background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+  color: white;
   transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 8px 24px rgba(6, 182, 212, 0.3);
+  border-color: transparent;
 }
 
-/* Future expansion roadmap */
+/* ============================================
+   Refined Roadmap
+   ============================================ */
 .roadmap-container {
-  margin-top: 3rem;
-  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
 .roadmap-item {
   display: flex;
   align-items: flex-start;
-  gap: var(--spacing-lg);
-  margin-bottom: var(--spacing-2xl);
+  gap: 2rem;
+  margin-bottom: 3rem;
+  padding: 2.5rem;
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  border: 1px solid rgba(6, 182, 212, 0.1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
+  overflow: hidden;
 }
 
-.roadmap-item:not(:last-child)::after {
+.roadmap-item::before {
   content: '';
   position: absolute;
-  left: 24px;
-  top: 48px;
-  bottom: -var(--spacing-2xl);
-  width: 2px;
-  background: linear-gradient(to bottom, var(--primary-color), transparent);
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.3), transparent);
+}
+
+.roadmap-item:hover {
+  transform: translateX(8px);
+  border-color: rgba(6, 182, 212, 0.2);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
 }
 
 .phase-number {
   width: 48px;
   height: 48px;
-  background: var(--primary-color);
-  color: white;
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, rgba(6, 182, 212, 0.05) 100%);
+  border: 1px solid rgba(6, 182, 212, 0.2);
+  color: #06b6d4;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: var(--font-size-lg);
-  font-weight: 700;
+  font-weight: 500;
   flex-shrink: 0;
-  position: relative;
-  z-index: 2;
-}
-
-.roadmap-content {
-  flex: 1;
-  background: white;
-  padding: var(--spacing-lg);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-  border: 1px solid var(--border-color);
+  font-size: 1.1rem;
 }
 
 .roadmap-content h3 {
-  font-size: var(--font-size-xl);
-  color: var(--primary-color);
-  margin-bottom: var(--spacing-sm);
+  color: #ffffff;
+  margin-bottom: 1rem;
+  font-weight: 400;
+  font-size: 1.2rem;
 }
 
 .roadmap-content p {
-  color: var(--text-secondary);
-  line-height: 1.6;
+  color: #94a3b8;
+  line-height: 1.7;
   margin: 0;
+  font-weight: 300;
 }
 
-/* Final CTA section */
+/* ============================================
+   Elegant CTA Section
+   ============================================ */
 .cta-section-final {
-  padding: 4rem 0;
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.2) 0%, rgba(0, 0, 0, 0.4) 100%);
+  padding: 6rem 2rem;
   text-align: center;
-  color: white;
+  position: relative;
+  z-index: 1;
 }
 
-.cta-content {
-  max-width: 600px;
-  margin: 0 auto;
+.cta-section-final::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.2), transparent);
 }
 
 .cta-content h2 {
-  font-size: var(--font-size-3xl);
-  margin-bottom: var(--spacing-lg);
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: #ffffff;
+  margin-bottom: 2rem;
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  text-rendering: optimizeLegibility;
 }
 
 .cta-content p {
-  font-size: var(--font-size-lg);
-  margin-bottom: var(--spacing-xl);
-  opacity: 0.9;
-  line-height: 1.6;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: #94a3b8;
+  max-width: 700px;
+  margin: 0 auto 3rem;
+  line-height: 1.7;
+  font-weight: 300;
+  text-rendering: optimizeLegibility;
 }
 
 .cta-buttons {
   display: flex;
-  gap: var(--spacing-md);
+  gap: 2rem;
   justify-content: center;
   flex-wrap: wrap;
 }
 
 .cta-button,
 .cta-button-secondary {
-  display: inline-block;
-  padding: var(--spacing-md) var(--spacing-xl);
-  border-radius: var(--radius-md);
-  font-size: var(--font-size-lg);
-  font-weight: 600;
-  transition: all 0.3s ease;
+  padding: 1rem 2.5rem;
+  border-radius: 12px;
   text-decoration: none;
-  box-shadow: var(--shadow-md);
+  font-weight: 500;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 1rem;
+  text-rendering: optimizeLegibility;
+  border: 1px solid transparent;
 }
 
 .cta-button {
-  background: white;
-  color: var(--primary-color);
+  background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+  color: white;
+  box-shadow: 0 8px 24px rgba(6, 182, 212, 0.3);
 }
 
 .cta-button:hover {
-  background: var(--surface-color);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(6, 182, 212, 0.4);
 }
 
 .cta-button-secondary {
   background: transparent;
-  color: white;
-  border: 2px solid white;
+  color: #06b6d4;
+  border: 1px solid rgba(6, 182, 212, 0.3);
 }
 
 .cta-button-secondary:hover {
-  background: white;
-  color: var(--primary-color);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
+  background: rgba(6, 182, 212, 0.1);
+  border-color: #06b6d4;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(6, 182, 212, 0.2);
 }
 
-/* Animations */
+/* ============================================
+   Subtle Animations
+   ============================================ */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -465,59 +632,58 @@
 .page-header,
 .problem-section,
 .solution-section,
+.business-model-section,
 .pricing-section,
 .future-section,
 .cta-section-final {
-  animation: fadeInUp 0.6s ease-out;
+  animation: fadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .solution-section {
   animation-delay: 0.1s;
 }
 
-.pricing-section {
+.business-model-section {
   animation-delay: 0.2s;
 }
 
-.future-section {
+.pricing-section {
   animation-delay: 0.3s;
 }
 
-.cta-section-final {
+.future-section {
   animation-delay: 0.4s;
 }
 
-/* Responsive Design */
+.cta-section-final {
+  animation-delay: 0.5s;
+}
+
+/* ============================================
+   Responsive Design
+   ============================================ */
 @media (max-width: 768px) {
   .page-header {
-    padding: 3rem 0 2rem;
-  }
-  
-  .page-header h1 {
-    font-size: var(--font-size-3xl);
-  }
-  
-  .page-subtitle {
-    font-size: var(--font-size-lg);
+    padding: 4rem 1rem 3rem;
   }
   
   .problem-section,
   .solution-section,
+  .business-model-section,
   .pricing-section,
   .future-section {
-    padding: 3rem 0;
+    padding: 4rem 1rem;
   }
   
   .problem-grid,
   .solution-grid,
   .business-model-grid {
     grid-template-columns: 1fr;
-    gap: var(--spacing-lg);
+    gap: 2rem;
   }
   
   .pricing-grid {
     grid-template-columns: 1fr;
-    gap: var(--spacing-lg);
   }
   
   .pricing-card.featured {
@@ -525,30 +691,13 @@
   }
   
   .pricing-card.featured:hover {
-    transform: translateY(-5px);
-  }
-  
-  .diagram {
-    max-width: 100%;
-    padding: var(--spacing-md);
-  }
-  
-  .diagram-caption {
-    font-size: var(--font-size-xs);
-    padding: 0 var(--spacing-sm);
+    transform: translateY(-8px);
   }
   
   .roadmap-item {
     flex-direction: column;
     text-align: center;
-  }
-  
-  .roadmap-item:not(:last-child)::after {
-    display: none;
-  }
-  
-  .cta-content h2 {
-    font-size: var(--font-size-2xl);
+    gap: 1.5rem;
   }
   
   .cta-buttons {
@@ -565,46 +714,41 @@
 
 @media (max-width: 480px) {
   .page-header {
-    padding: 2rem 0 1.5rem;
-  }
-  
-  .page-header h1 {
-    font-size: var(--font-size-2xl);
+    padding: 3rem 1rem 2rem;
   }
   
   .problem-section,
   .solution-section,
+  .business-model-section,
   .pricing-section,
   .future-section {
-    padding: 2rem 0;
+    padding: 3rem 1rem;
   }
   
   .problem-card,
-  .solution-card {
-    padding: var(--spacing-lg);
-  }
-  
+  .solution-card,
+  .business-model-card,
   .pricing-card {
-    padding: var(--spacing-lg);
-  }
-  
-  .roadmap-content {
-    padding: var(--spacing-md);
-  }
-  
-  .cta-content {
-    padding: 0 var(--spacing-md);
+    padding: 2rem 1.5rem;
   }
   
   .icon-wrapper {
-    width: 48px;
-    height: 48px;
-    font-size: 20px;
+    width: 56px;
+    height: 56px;
+    font-size: 1.25rem;
   }
   
   .phase-number {
     width: 40px;
     height: 40px;
-    font-size: var(--font-size-base);
+    font-size: 1rem;
+  }
+  
+  .roadmap-item {
+    padding: 2rem 1.5rem;
+  }
+  
+  .cta-section-final {
+    padding: 4rem 1rem;
   }
 }

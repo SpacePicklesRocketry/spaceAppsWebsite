@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import STLViewer from './STLViewer';
 import './SpaceHero.css';
 
-const SpaceHero = ({ title = "Space Innovation", subtitle = "Explore the future of aerospace technology" }) => {
+const SpaceHero = ({ title = "TODO: Company Name", subtitle = "TODO: Tagline" }) => {
   const [hasMounted, setHasMounted] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
 

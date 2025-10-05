@@ -6,9 +6,9 @@ const Footer = () => {
       <div className="container">
         <div className="footer-content">
           <div className="footer-section">
-            <h3 className="footer-title">LEO Satellite Hub</h3>
+            <h3 className="footer-title">TODO: Company Name</h3>
             <p className="footer-description">
-              Affordable space research platform for educational institutions.
+              TODO: Company description
             </p>
           </div>
           
@@ -27,9 +27,9 @@ const Footer = () => {
           <div className="footer-section">
             <h4 className="footer-subtitle">Contact Info</h4>
             <div className="contact-info">
-              <p>Email: info@leosatellithub.com</p>
-              <p>Phone: (555) 123-4567</p>
-              <p>Address: 123 Space Avenue, Tech City, TC 12345</p>
+              <p>Email: TODO: email</p>
+              <p>Phone: TODO: phone</p>
+              <p>Address: TODO: address</p>
             </div>
           </div>
           
@@ -45,7 +45,7 @@ const Footer = () => {
         
         <div className="footer-bottom">
           <p className="copyright">
-            © 2024 LEO Satellite Hub. All rights reserved.
+            © 2024 TODO: Company Name. All rights reserved.
           </p>
         </div>
       </div>

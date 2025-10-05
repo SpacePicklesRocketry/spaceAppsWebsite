@@ -1,6 +1,6 @@
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls, useProgress, Html } from '@react-three/drei'
-import { Suspense, useRef } from 'react'
+import { Suspense, useRef, useEffect } from 'react'
 import { STLLoader } from 'three/examples/jsm/loaders/STLLoader'
 import { useLoader, useFrame } from '@react-three/fiber'
 import { ErrorBoundary } from 'react-error-boundary'
@@ -19,13 +19,13 @@ function SpaceBackground() {
     }
   })
 
-  // Generate random star positions
-  const starCount = 2000
+  // Generate random star positions - more stars for better coverage
+  const starCount = 3000
   const positions = new Float32Array(starCount * 3)
   
   for (let i = 0; i < starCount; i++) {
     // Create a sphere of stars around the scene
-    const radius = 50 + Math.random() * 50
+    const radius = 40 + Math.random() * 60
     const theta = Math.random() * Math.PI * 2
     const phi = Math.acos(Math.random() * 2 - 1)
     
@@ -45,10 +45,10 @@ function SpaceBackground() {
         />
       </bufferGeometry>
       <pointsMaterial
-        size={0.5}
+        size={0.8}
         color="#ffffff"
         transparent
-        opacity={0.8}
+        opacity={0.9}
         sizeAttenuation={false}
       />
     </points>
@@ -122,13 +122,53 @@ function STLViewer({
   className = '',
   reducedMotion = false
 }) {
+  const canvasRef = useRef()
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (canvasRef.current) {
+        // Force canvas to recalculate its size
+        const canvas = canvasRef.current
+        canvas.style.width = '100%'
+        canvas.style.height = '100%'
+        
+        // Force Three.js to resize
+        const renderer = canvas._gl
+        if (renderer) {
+          const width = canvas.clientWidth
+          const height = canvas.clientHeight
+          renderer.setSize(width, height, false)
+        }
+      }
+    }
+
+    // Initial resize with delay to ensure DOM is ready
+    setTimeout(handleResize, 100)
+    
+    // Add resize listener
+    window.addEventListener('resize', handleResize)
+    
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
   return (
     <Canvas
+      ref={canvasRef}
       camera={{ position: cameraPosition, fov: fov }}
       className={className}
       shadows
       dpr={[1, 1.5]}
-      style={{ background: '#000000' }}
+      style={{ 
+        background: '#000000',
+        width: '100%',
+        height: '100%',
+        display: 'block'
+      }}
+      gl={{ 
+        antialias: true,
+        alpha: false,
+        powerPreference: "high-performance"
+      }}
     >
       <ErrorBoundary FallbackComponent={ErrorFallback}>
         <Suspense fallback={<Loader />}>
