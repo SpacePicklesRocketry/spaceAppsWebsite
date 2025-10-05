@@ -1,5 +1,7 @@
 import './Dashboard.css'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, lazy, Suspense } from 'react'
+
+const SpaceAppsDashboard = lazy(() => import('./SpaceAppsUI/data_display/src/App.jsx'))
 
 const Dashboard = () => {
   // Simulate loading state for demonstration
@@ -25,12 +27,10 @@ const Dashboard = () => {
         
         <section className="dashboard-content">
           <div className="dashboard-placeholder">
-            <h2>NPM Dashboard Integration</h2>
+            <h2>Operations Dashboard</h2>
             <p>
-              The existing NPM dashboard will be integrated here to provide 
-              real-time monitoring and control capabilities for your satellite hub.
+              Real-time monitoring and control capabilities for your satellite hub.
             </p>
-            
             <div className={`dashboard-container ${isLoading ? 'skeleton' : ''}`}>
               {isLoading ? (
                 <div className="skeleton-content">
@@ -41,17 +41,18 @@ const Dashboard = () => {
                   <div className="skeleton skeleton-text"></div>
                 </div>
               ) : (
-                <>
-                  <p>NPM Dashboard will be embedded here</p>
-                  <p>This will include:</p>
-                  <ul>
-                    <li>Real-time telemetry data</li>
-                    <li>System status monitoring</li>
-                    <li>Command and control interface</li>
-                    <li>Data visualization tools</li>
-                    <li>Alert and notification systems</li>
-                  </ul>
-                </>
+                <div className="spaceapps-embed">
+                  <Suspense
+                    fallback={
+                      <div className="dashboard-loading">
+                        <div className="loading-spinner"></div>
+                        Loading dashboard...
+                      </div>
+                    }
+                  >
+                    <SpaceAppsDashboard />
+                  </Suspense>
+                </div>
               )}
             </div>
           </div>
