@@ -1,10 +1,59 @@
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls, useProgress, Html } from '@react-three/drei'
-import { Suspense } from 'react'
+import { Suspense, useRef } from 'react'
 import { STLLoader } from 'three/examples/jsm/loaders/STLLoader'
-import { useLoader } from '@react-three/fiber'
+import { useLoader, useFrame } from '@react-three/fiber'
 import { ErrorBoundary } from 'react-error-boundary'
+import { SphereGeometry, PointsMaterial, BufferGeometry, Float32BufferAttribute } from 'three'
 import './STLViewer.css'
+
+// Space background with moving stars
+function SpaceBackground() {
+  const starsRef = useRef()
+  
+  useFrame((state) => {
+    if (starsRef.current) {
+      // Rotate the starfield slowly to create movement
+      starsRef.current.rotation.y += 0.0005
+      starsRef.current.rotation.x += 0.0002
+    }
+  })
+
+  // Generate random star positions
+  const starCount = 2000
+  const positions = new Float32Array(starCount * 3)
+  
+  for (let i = 0; i < starCount; i++) {
+    // Create a sphere of stars around the scene
+    const radius = 50 + Math.random() * 50
+    const theta = Math.random() * Math.PI * 2
+    const phi = Math.acos(Math.random() * 2 - 1)
+    
+    positions[i * 3] = radius * Math.sin(phi) * Math.cos(theta)
+    positions[i * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta)
+    positions[i * 3 + 2] = radius * Math.cos(phi)
+  }
+
+  return (
+    <points ref={starsRef}>
+      <bufferGeometry>
+        <bufferAttribute
+          attach="attributes-position"
+          count={starCount}
+          array={positions}
+          itemSize={3}
+        />
+      </bufferGeometry>
+      <pointsMaterial
+        size={0.5}
+        color="#ffffff"
+        transparent
+        opacity={0.8}
+        sizeAttenuation={false}
+      />
+    </points>
+  )
+}
 
 // Error fallback component for ErrorBoundary
 function ErrorFallback() {
@@ -70,16 +119,22 @@ function STLViewer({
   color = "#1e40af",
   metalness = 0.3,
   roughness = 0.4,
-  className = ''
+  className = '',
+  reducedMotion = false
 }) {
   return (
     <Canvas
       camera={{ position: cameraPosition, fov: fov }}
       className={className}
       shadows
+      dpr={[1, 1.5]}
+      style={{ background: '#000000' }}
     >
       <ErrorBoundary FallbackComponent={ErrorFallback}>
         <Suspense fallback={<Loader />}>
+          {/* Space background with moving stars */}
+          <SpaceBackground />
+          
           {/* Even lighting setup */}
           <ambientLight intensity={0.6} />
           <directionalLight position={[5, 5, 5]} intensity={0.4} />
@@ -95,10 +150,12 @@ function STLViewer({
           />
           
           <OrbitControls
-            enableZoom={true}
-            autoRotate={autoRotate}
+            enableZoom={false}
+            autoRotate={autoRotate && !reducedMotion}
             autoRotateSpeed={autoRotateSpeed}
-            enablePan={true}
+            enablePan={false}
+            enableRotate={true}
+            rotateSpeed={0.5}
             minDistance={2}
             maxDistance={10}
             enableDamping={true}

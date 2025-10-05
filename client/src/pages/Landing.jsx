@@ -1,46 +1,11 @@
 import { Link } from 'react-router-dom'
-import STLViewer from '../components/STLViewer'
+import SpaceHero from '../components/SpaceHero'
 import './Landing.css'
 
 const Landing = () => {
   return (
     <div className="landing-page">
-      <section className="hero-section">
-        <div className="container">
-          <h1 className="hero-title">
-            Welcome to LEO Satellite Hub
-          </h1>
-          <p className="hero-subtitle">
-            Affordable space research platform for educational institutions
-          </p>
-          
-          <div className="stl-viewer-container">
-            <STLViewer 
-              modelPath="/models/test.stl" 
-              autoRotate={true} 
-              scale={0.0175} 
-              color="#06b6d4"
-              cameraPosition={[20, 40, 28]} 
-            />
-          </div>
-          
-          <div className="hero-description">
-            <h2>Revolutionizing LEO Research</h2>
-            <p>
-              One of the biggest limitations on commercial exploration of LEO is the high cost of developing full satellites. Our standardized hub system offers companies a cheap and easy way to conduct LEO research without the complexities of space operation.
-            </p>
-          </div>
-          
-          <div className="cta-section">
-            <Link to="/business-model" className="cta-button">
-              Explore Our Business Model →
-            </Link>
-            <Link to="/technology" className="cta-button-secondary">
-              View Technology Details
-            </Link>
-          </div>
-        </div>
-      </section>
+      <SpaceHero />
       
       {/* Additional sections will be added in the landing page implementation phase */}
       <section className="features-section">
