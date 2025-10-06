@@ -33,7 +33,6 @@ const Navbar = () => {
               <Link to="/business-model" className="navbar-link" onClick={() => setIsMobileMenuOpen(false)}>Business Model</Link>
               <Link to="/technology" className="navbar-link" onClick={() => setIsMobileMenuOpen(false)}>Technology</Link>
               <Link to="/dashboard" className="navbar-link" onClick={() => setIsMobileMenuOpen(false)}>Dashboard</Link>
-              <Link to="/contact" className="navbar-link" onClick={() => setIsMobileMenuOpen(false)}>Contact</Link>
             </div>
             
             <button 

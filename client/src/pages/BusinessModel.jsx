@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { useEffect } from 'react'
 import {
   FaRocket,
   FaDollarSign,
@@ -15,42 +16,45 @@ import AnnotatedSTLViewer from '../components/AnnotatedSTLViewer'
 import './BusinessModel.css'
 
 const BusinessModel = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
   return (
     <div className="business-model-page">
       <div className="container">
         <section className="manifesto-section">
-          <h1 className="manifesto-title">voxel space manifesto</h1>
-          <p className="manifesto-author">written by the <Link to="/team" className="team-link">voxel space team</Link>.</p>
+          <h1 className="manifesto-title">Voxel Space Manifesto</h1>
+          <p className="manifesto-author">written by the voxel space team.</p>
 
           <div className="manifesto-content">
             <p>
-              our goal is simple: <span className="highlight">innovate to utilize space sustainably.</span>
+              Our goal is simple: <span className="highlight">innovate to utilize space sustainably.</span>
             </p>
 
             <p>
-              it's obvious, space is a tech industry now--completely overrun by Low Earth Orbits(LEOs) from giants of infinite resources who govern space exclusively.
+              It's obvious, space is a tech industry now--completely overrun by Low Earth Orbits(LEOs) from giants of infinite resources who govern space exclusively.
             </p>
 
             <p>
-              we want to change this. making space accessible, to everyone, forever, is our mission.
+              We want to change this. Making space accessible, to everyone, forever, is our mission.
             </p>
 
 
             <ul className="manifesto-list">
               <li>
-                current space access is limited to <span className="highlight">massive corporations and government agencies</span> with unlimited resources.
+                Current space access is limited to <span className="highlight">massive corporations and government agencies</span> with unlimited resources.
               </li>
               <li>
-                traditional satellite development costs <span className="highlight">$10M+ per mission</span>, making space research impossible for universities and smaller institutions.
+                Traditional satellite development costs <span className="highlight">$10M+ per mission</span>, making space research difficult for universities and smaller institutions.
               </li>
               <li>
-                modular space systems enable <span className="highlight">shared infrastructure and reduced costs</span>, democratizing access to orbital research capabilities.
+                Modular space systems enable <span className="highlight">shared infrastructure and reduced costs</span>, democratizing access to orbital research capabilities.
               </li>
             </ul>
 
 
             <p>
-              we're a team wanting to reach for the stars, literally.
+              We're a team wanting to reach for the stars, literally.
             </p>
           </div>
           
@@ -164,14 +168,10 @@ const BusinessModel = () => {
           <div className="cta-content">
             <h2>Ready to Launch Your Research?</h2>
             <p>
-              Join the growing community of institutions making space research accessible.
-              Contact us to learn more about our platform and pricing options.
+              See what data we can provide for your research:
             </p>
             <div className="cta-buttons">
-              <Link to="/contact" className="cta-button">
-                Get In Touch
-              </Link>
-              <Link to="/dashboard" className="cta-button-secondary">
+              <Link to="/dashboard" className="cta-button">
                 View Dashboard
               </Link>
             </div>

@@ -471,8 +471,19 @@ h1 {
 
 /* ===== RIGHT SIDEBAR WIDGETS ===== */
 .right-widgets {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, auto);
+  gap: 12px;
+  margin-left: 12px;
+  min-width: 280px;
+}
+
+/* Company dashboard specific right widgets layout */
+.company-dashboard .right-widgets {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, auto);
   gap: 12px;
   margin-left: 12px;
   min-width: 280px;
@@ -633,11 +644,37 @@ h1 {
   border: 1px solid rgba(255,255,255,0.10);
 }
 
+.obstacle-avoidance-card .card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
 .obstacle-avoidance-card h3 {
   color: #ffffff;
-  margin-bottom: 16px;
+  margin: 0;
   font-size: 1.1rem;
   font-weight: 600;
+}
+
+.temperature-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.temperature-image {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.temperature-image:hover {
+  opacity: 1;
 }
 
 .obstacle-modules {
@@ -822,6 +859,16 @@ h1 {
     grid-template-columns: 1.5fr 1fr;
     gap: 20px;
   }
+  
+  .right-widgets {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+  }
+  
+  .company-dashboard .right-widgets {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+  }
 }
 
 @media (max-width: 900px) {
@@ -835,6 +882,13 @@ h1 {
   
   .right-widgets {
     margin-left: 0;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+  
+  .company-dashboard .right-widgets {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
   }
   
   .top-controls {

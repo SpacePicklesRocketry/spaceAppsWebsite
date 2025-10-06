@@ -293,9 +293,10 @@ input:focus, textarea:focus, select:focus {
 
 .footer-content {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: 2fr 1fr;
   gap: var(--spacing-xl);
   margin-bottom: var(--spacing-xl);
+  align-items: start;
 }
 
 .footer-section {
@@ -373,6 +374,18 @@ input:focus, textarea:focus, select:focus {
 .copyright {
   font-size: var(--font-size-sm);
   color: var(--text-secondary);
+}
+
+/* Responsive footer */
+@media (max-width: 768px) {
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+  
+  .footer-section {
+    text-align: center;
+  }
 }
 
 /* Additional utility classes */

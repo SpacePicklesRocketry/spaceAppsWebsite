@@ -4,7 +4,6 @@ import Landing from './pages/Landing'
 import BusinessModel from './pages/BusinessModel'
 import STLExplanation from './pages/STLExplanation'
 import Dashboard from './pages/Dashboard'
-import Contact from './pages/Contact'
 
 function App() {
   return (
@@ -15,7 +14,6 @@ function App() {
           <Route path="/business-model" element={<BusinessModel />} />
           <Route path="/technology" element={<STLExplanation />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/contact" element={<Contact />} />
         </Routes>
       </Layout>
     </BrowserRouter>

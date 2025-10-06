@@ -84,7 +84,16 @@ export default function ObstacleAvoidanceCard({ modulesData, moduleNames = [] })
 
   return (
     <div className="obstacle-avoidance-card widget">
-      <h3>Obstacle Avoidance Status</h3>
+      <div className="card-header">
+        <h3>Obstacle Avoidance Status</h3>
+        <div className="temperature-icon">
+          <img 
+            src="/images/temperature.png" 
+            alt="Temperature monitoring" 
+            className="temperature-image"
+          />
+        </div>
+      </div>
       <div className="obstacle-modules">
         {validModules.map(({ columnIndex, moduleName, obstacleStatus }) => (
           <div key={columnIndex} className="obstacle-module">

@@ -405,12 +405,14 @@ function App({ userType = 'consumer' }) {
                   <>
                     <CommunicationsPanel comms={model.communications} />
                     <UptimeWidget status={model.status} />
+                    <MissionTimer mission={model.mission} />
                   </>
                 );
               })() : (
                 <>
                   <CommunicationsPanel comms={communications} />
                   <UptimeWidget status={status} />
+                  <MissionTimer mission={mission} />
                 </>
               )}
               <ObstacleAvoidanceCard 
