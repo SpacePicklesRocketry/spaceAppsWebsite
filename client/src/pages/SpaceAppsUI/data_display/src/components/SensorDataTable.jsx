@@ -35,10 +35,10 @@ export default function SensorDataTable({ moduleData, moduleName }) {
 
   // Define sensor configurations using dedicated data rows
   const sensorConfigs = [
-    { key: 'CORE_TEMP_DATA', label: 'Core Temp', units: '°C', icon: '🌡️' },
-    { key: 'BATTERY_VOLTS_DATA', label: 'Battery Volts', units: 'V', icon: '🔋' },
-    { key: 'PRESSURE_DATA', label: 'Pressure', units: 'kPa', icon: '📊' },
-    { key: 'RADIATION_DATA', label: 'Radiation', units: 'mSv', icon: '⚠️' }
+    { key: 'CORE_TEMP_DATA', label: 'Core Temp', units: '°C', icon: '◉' },
+    { key: 'BATTERY_VOLTS_DATA', label: 'Battery Volts', units: 'V', icon: '◐' },
+    { key: 'PRESSURE_DATA', label: 'Pressure', units: 'kPa', icon: '◈' },
+    { key: 'RADIATION_DATA', label: 'Radiation', units: 'mSv', icon: '△' }
   ];
 
   // Get all sensor data arrays

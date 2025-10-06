@@ -7,6 +7,7 @@ const Landing = () => {
     <div className="landing-page">
       <SpaceHero />
       
+      
       {/* Manifesto Blurb Section */}
       <section className="manifesto-blurb-section">
         <div className="container">

@@ -66,7 +66,7 @@ function Annotation({ position, label, description, onClick, isVisible, animatio
           <div className="annotation-dot"></div>
         </div>
         <div className="annotation-label">{label}</div>
-        <div className="annotation-description">{description}</div>
+        {description && <div className="annotation-description">{description}</div>}
       </div>
     </Html>
   )
@@ -143,6 +143,9 @@ function AnnotatedSTLViewer({
   const navigate = useNavigate()
   const [visibleAnnotations, setVisibleAnnotations] = useState(new Set(annotations.map((_, index) => index)))
   const [animationsEnabled, setAnimationsEnabled] = useState(true)
+  const [cameraLocked, setCameraLocked] = useState(false)
+  const [userInteracted, setUserInteracted] = useState(false)
+  const controlsRef = useRef()
 
   useEffect(() => {
     const handleResize = () => {
@@ -172,15 +175,57 @@ function AnnotatedSTLViewer({
     }
   }
 
+  const handleUserInteraction = () => {
+    if (!userInteracted) {
+      setUserInteracted(true)
+      setCameraLocked(false)
+      setAnimationsEnabled(false)
+    }
+  }
+
+  const resetToAnnotationView = () => {
+    setUserInteracted(false)
+    setCameraLocked(true)
+    setAnimationsEnabled(true)
+  }
+
+  const enableAnnotationView = () => {
+    console.log('Show annotations clicked') // Debug log
+    
+    // Move camera to annotation view position
+    if (controlsRef.current) {
+      console.log('Controls ref found, moving camera') // Debug log
+      
+      // Set target position and look at center
+      controlsRef.current.target.set(0, 0, 0)
+      controlsRef.current.object.position.set(3, 2, -2)
+      controlsRef.current.update()
+      
+      // Wait for animation to complete, then lock camera
+      setTimeout(() => {
+        setCameraLocked(true)
+        setAnimationsEnabled(true)
+        console.log('Camera locked and annotations enabled') // Debug log
+      }, 500) // Shorter animation
+    } else {
+      console.log('Controls ref not found, using fallback') // Debug log
+      // Fallback if controls not ready
+      setCameraLocked(true)
+      setAnimationsEnabled(true)
+    }
+  }
+
   return (
     <div className="annotated-stl-container">
-      <button 
-        className="animation-toggle"
-        onClick={() => setAnimationsEnabled(!animationsEnabled)}
-        title={animationsEnabled ? "Disable animations" : "Enable animations"}
-      >
-        {animationsEnabled ? "⏸️" : "▶️"}
-      </button>
+      <div className="annotation-controls">
+        <button 
+          className="animation-toggle"
+          onClick={cameraLocked ? () => setCameraLocked(false) : enableAnnotationView}
+          title={cameraLocked ? "Enable free camera movement" : "Show annotations with locked camera"}
+        >
+          {cameraLocked ? "FREE CAMERA" : "SHOW ANNOTATIONS"}
+        </button>
+      </div>
       
       <Canvas
         ref={canvasRef}
@@ -217,7 +262,7 @@ function AnnotatedSTLViewer({
               roughness={roughness}
             />
             
-            {animationsEnabled && annotations.map((annotation, index) => (
+            {animationsEnabled && cameraLocked && annotations.map((annotation, index) => (
               <Annotation
                 key={index}
                 position={annotation.position}
@@ -230,16 +275,18 @@ function AnnotatedSTLViewer({
             ))}
             
             <OrbitControls
-              enableZoom={false}
-              autoRotate={autoRotate && !reducedMotion && animationsEnabled}
+              ref={controlsRef}
+              enableZoom={!cameraLocked}
+              autoRotate={autoRotate && !reducedMotion && animationsEnabled && cameraLocked}
               autoRotateSpeed={autoRotateSpeed}
-              enablePan={false}
-              enableRotate={true}
+              enablePan={!cameraLocked}
+              enableRotate={!cameraLocked}
               rotateSpeed={0.5}
               minDistance={2}
               maxDistance={10}
               enableDamping={true}
               dampingFactor={0.05}
+              onStart={handleUserInteraction}
             />
           </Suspense>
         </ErrorBoundary>

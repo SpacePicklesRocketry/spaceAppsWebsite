@@ -19,8 +19,8 @@ const BusinessModel = () => {
     <div className="business-model-page">
       <div className="container">
         <section className="manifesto-section">
-          <h1 className="manifesto-title">astro lab manifesto</h1>
-          <p className="manifesto-author">written by the <Link to="/team" className="team-link">astro lab team</Link>.</p>
+          <h1 className="manifesto-title">voxel space manifesto</h1>
+          <p className="manifesto-author">written by the <Link to="/team" className="team-link">voxel space team</Link>.</p>
 
           <div className="manifesto-content">
             <p>
@@ -54,9 +54,6 @@ const BusinessModel = () => {
             </p>
           </div>
           
-          <div className="scroll-indicator">
-            <div className="scroll-arrow">V</div>
-          </div>
         </section>
 
       </div>
@@ -66,58 +63,48 @@ const BusinessModel = () => {
           <h2>Our Solution: Research Modules</h2>
           <div className="solution-stl-container">
             <AnnotatedSTLViewer
-              modelPath="/models/Connector.stl"
+              modelPath="/models/full.stl"
               annotations={[
                 {
-                  position: [2, 1, 0],
-                  label: "Central Hub",
-                  description: "Core infrastructure",
+                  position: [0.5 ,0.9,3],
+                  label: "Solar Panel",
                   link: "/technology"
                 },
                 {
-                  position: [-1.5, 0.8, 0],
-                  label: "Power Module",
-                  description: "Solar panels & batteries",
-                  link: "/technology"
-                },
-                {
-                  position: [1.5, -0.8, 0],
-                  label: "Communication",
-                  description: "Antenna & transceiver",
-                  link: "/technology"
-                },
-                {
-                  position: [-1, -1.2, 0],
+                  position: [-0.2,1.75,0.1],
                   label: "Research Module",
-                  description: "Scientific instruments",
                   link: "/technology"
                 },
                 {
-                  position: [0, 1.5, 0],
-                  label: "Thermal Control",
-                  description: "Heat management",
+                  position: [-0.7,1,-1],
+                  label: "Gimballed Thruster",
+                  link: "/technology"
+                },
+                {
+                  position: [1.2, 0.5, 0.5],
+                  label: "Shield",
                   link: "/technology"
                 }
               ]}
-              autoRotate={true}
+              autoRotate={false}
               autoRotateSpeed={0.3}
-              scale={0.03}
+              scale={0.007}
               color="#06b6d4"
             />
           </div>
 
           <div className="solution-descriptions">
             <div className="description-item">
-              <h4>Modular Design</h4>
-              <p>Each component can be independently developed, tested, and replaced without affecting the entire system.</p>
+              <h4>Designed for Researchers</h4>
+              <p>Our central hub provides shared infrastructure that dramatically reduces costs for individual research modules while delivering essential data and operational support.</p>
             </div>
             <div className="description-item">
-              <h4>Shared Infrastructure</h4>
-              <p>Multiple research institutions can share the same orbital platform, dramatically reducing costs.</p>
+              <h4>Cost Reduction Through Shared Systems</h4>
+              <p>Solar panels, thrusters, and shields are shared across all modules, eliminating redundant hardware costs and reducing operational expenses by up to 70%.</p>
             </div>
             <div className="description-item">
-              <h4>Plug-and-Play Integration</h4>
-              <p>Standardized interfaces allow researchers to focus on science rather than spacecraft engineering.</p>
+              <h4>Space Debris Protection</h4>
+              <p>Advanced shielding and precision thrusters help avoid space debris collisions, protecting valuable research equipment and ensuring mission continuity.</p>
             </div>
           </div>
         </div>
@@ -125,63 +112,52 @@ const BusinessModel = () => {
 
       <div className="container">
 
-        <section className="business-model-section">
-          <h2>Business Model</h2>
+        <section className="pricing-section">
+          <h2>Diversified Revenue Streams</h2>
           <p className="section-intro">
-            Our sustainable business model ensures long-term viability while making space research
-            accessible to educational institutions worldwide.
-          </p>
+            Voxel Space’s modular pricing blends recurring and one-time revenue streams for scalability and strong margins. Recurring income comes from power, sensor access, and insurance, while one-time payments cover hardware and payload weight. This flexible model maximizes customer adoption and ensures predictable, diversified revenue growth.space
+              </p>
 
-          <div className="business-model-content">
-            <div className="business-model-grid">
-              <div className="business-model-card">
-                <h3>Revenue Model</h3>
-                <ul>
-                  <li>Mission-based pricing for module slots</li>
-                  <li>Subscription services for ongoing support</li>
-                  <li>Premium data analytics and reporting</li>
-                  <li>Custom module development partnerships</li>
-                </ul>
+          <div className="revenue-streams-container">
+            <div className="revenue-table">
+              <div className="revenue-header">
+                <div className="revenue-cell header">Feature</div>
+                <div className="revenue-cell header">Base</div>
+                <div className="revenue-cell header">Add-ons</div>
               </div>
-
-              <div className="business-model-card">
-                <h3>Utilization Strategy</h3>
-                <ul>
-                  <li>Multi-client hub sharing maximizes efficiency</li>
-                  <li>Flexible mission durations (6-24 months)</li>
-                  <li>Scalable infrastructure supports growth</li>
-                  <li>Cross-institutional collaboration opportunities</li>
-                </ul>
+              
+              <div className="revenue-row">
+                <div className="revenue-cell feature">Hardware Acquisition</div>
+                <div className="revenue-cell base selected">Renting hardware</div>
+                <div className="revenue-cell addon">Buying hardware</div>
               </div>
-
-              <div className="business-model-card">
-                <h3>SLAs & Commitments</h3>
-                <ul>
-                  <li>99.5% uptime guarantee for hub operations</li>
-                  <li>24/7 mission monitoring and support</li>
-                  <li>Data backup and recovery protocols</li>
-                  <li>Performance metrics and reporting</li>
-                </ul>
+              
+              <div className="revenue-row">
+                <div className="revenue-cell feature">Power Limit</div>
+                <div className="revenue-cell base">300W limit</div>
+                <div className="revenue-cell addon selected">500W limit</div>
               </div>
-
-              <div className="business-model-card">
-                <h3>Optional Add-ons</h3>
-                <ul>
-                  <li>Advanced mission planning tools</li>
-                  <li>Custom data visualization dashboards</li>
-                  <li>Research collaboration platforms</li>
-                  <li>Educational content and training</li>
-                </ul>
+              
+              <div className="revenue-row">
+                <div className="revenue-cell feature">Weight</div>
+                <div className="revenue-cell base selected">Standard weight</div>
+                <div className="revenue-cell addon">Overweight (+$8k/kg)</div>
+              </div>
+              
+              <div className="revenue-row">
+                <div className="revenue-cell feature">Sensors</div>
+                <div className="revenue-cell base selected">Payload sensors</div>
+                <div className="revenue-cell addon">Hub sensor utilization</div>
+              </div>
+              
+              <div className="revenue-row">
+                <div className="revenue-cell feature">Insurance</div>
+                <div className="revenue-cell base">Payload uninsured</div>
+                <div className="revenue-cell addon selected">Payload insurance</div>
               </div>
             </div>
-          </div>
-        </section>
 
-        <section className="pricing-section">
-          <h2>Pricing & Offerings</h2>
-          <p className="section-intro">
-            [PRICING CONTENT PLACEHOLDER]
-          </p>
+          </div>
         </section>
         
         <section className="cta-section-final">

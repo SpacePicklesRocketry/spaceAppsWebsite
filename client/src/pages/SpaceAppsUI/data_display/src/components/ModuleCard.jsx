@@ -126,7 +126,7 @@ export default function ModuleCard({ moduleName, moduleData }) {
       <div className="module-sensors-compact">
         <div className="sensor-grid">
           <div className="sensor-item">
-            <div className="sensor-icon">🌡️</div>
+            <div className="sensor-icon">◉</div>
             <div className="sensor-info">
               <div className="sensor-value">{getLatestValue(moduleData?.CORE_TEMP_DATA) || 'N/A'}°C</div>
               <div className="sensor-label">Temperature</div>
@@ -134,7 +134,7 @@ export default function ModuleCard({ moduleName, moduleData }) {
           </div>
 
           <div className="sensor-item">
-            <div className="sensor-icon">🔋</div>
+            <div className="sensor-icon">◐</div>
             <div className="sensor-info">
               <div className="sensor-value">{getLatestValue(moduleData?.BATTERY_VOLTS_DATA) || 'N/A'}V</div>
               <div className="sensor-label">Battery</div>
@@ -142,7 +142,7 @@ export default function ModuleCard({ moduleName, moduleData }) {
           </div>
 
           <div className="sensor-item">
-            <div className="sensor-icon">🚧</div>
+            <div className="sensor-icon">▣</div>
             <div className="sensor-info">
               <div 
                 className="sensor-value" 
@@ -155,7 +155,7 @@ export default function ModuleCard({ moduleName, moduleData }) {
           </div>
 
           <div className="sensor-item">
-            <div className="sensor-icon">⚠️</div>
+            <div className="sensor-icon">△</div>
             <div className="sensor-info">
               <div className="sensor-value">{getLatestValue(moduleData?.RADIATION_DATA) || 'N/A'}</div>
               <div className="sensor-label">Radiation</div>
@@ -167,7 +167,7 @@ export default function ModuleCard({ moduleName, moduleData }) {
       {timers && (
         <div className="module-timers">
           <div className="timer-item">
-            <div className="timer-icon">⏱️</div>
+            <div className="timer-icon">●</div>
             <div className="timer-info">
               <div className="timer-value">{timers.elapsed}</div>
               <div className="timer-label">Elapsed</div>
@@ -175,7 +175,7 @@ export default function ModuleCard({ moduleName, moduleData }) {
           </div>
           {timers.remaining && (
             <div className="timer-item">
-              <div className="timer-icon">⏰</div>
+              <div className="timer-icon">○</div>
               <div className="timer-info">
                 <div 
                   className="timer-value"

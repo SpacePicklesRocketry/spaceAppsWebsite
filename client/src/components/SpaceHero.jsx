@@ -9,7 +9,7 @@ const SpaceHero = ({ title = "Voxel Space", subtitle = "Modular space homes that
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   
   const words = ['affordable', 'repairable', 'recoverable'];
-  const baseText = 'Modular space homes that are ';
+  const baseText = 'Space modules that are ';
 
   useEffect(() => {
     // Check for reduced motion preference

@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Earth with Satellites</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+        #container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+        #info {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+        #controls {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            color: white;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+        .control-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 8px 16px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .control-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .control-btn.active {
+            background: rgba(96, 165, 250, 0.3);
+            border-color: rgba(96, 165, 250, 0.6);
+        }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+    
+    <div id="info">
+        <h3>🌍 Earth with NASA Satellites</h3>
+        <p><strong>Active Satellites:</strong> <span id="satelliteCount">76</span></p>
+        <p><strong>View Mode:</strong> <span id="viewMode">All Satellites</span></p>
+        <p><strong>Data Source:</strong> NASA SSC Web Services</p>
+    </div>
+    
+    <div id="controls">
+        <h4>Controls</h4>
+        <button class="control-btn active" onclick="setViewMode('all')">All Satellites</button>
+        <button class="control-btn" onclick="setViewMode('leo')">LEO Only</button>
+        <button class="control-btn" onclick="setViewMode('meo')">MEO Only</button>
+        <button class="control-btn" onclick="setViewMode('geo')">GEO Only</button>
+        <br>
+        <button class="control-btn" onclick="toggleAutoRotate()">Toggle Auto-Rotate</button>
+        <button class="control-btn" onclick="resetCamera()">Reset View</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    
+    <script>
+        // Scene setup
+        console.log('🚀 Initializing Three.js scene...');
+        
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        
+        console.log('📐 Camera created:', camera);
+        console.log('🎨 Renderer created:', renderer);
+        
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setClearColor(0x111111); // Slightly lighter background
+        document.getElementById('container').appendChild(renderer.domElement);
+        
+        console.log('✅ Renderer added to DOM');
+        
+        // Controls
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+        controls.autoRotate = true;
+        controls.autoRotateSpeed = 0.5;
+        
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0x404040, 0.4);
+        scene.add(ambientLight);
+        
+        const pointLight = new THREE.PointLight(0xffffff, 1, 100);
+        pointLight.position.set(10, 10, 10);
+        scene.add(pointLight);
+        
+        // Earth with enhanced materials
+        console.log('🌍 Creating Earth...');
+        const earthGeometry = new THREE.SphereGeometry(2, 64, 64);
+        const earthMaterial = new THREE.MeshPhongMaterial({ 
+            color: 0x4A90E2,
+            shininess: 100,
+            specular: 0x222222
+        });
+        const earth = new THREE.Mesh(earthGeometry, earthMaterial);
+        scene.add(earth);
+        console.log('✅ Earth added to scene at position:', earth.position);
+        
+        // Earth atmosphere with animation
+        const atmosphereGeometry = new THREE.SphereGeometry(2.1, 64, 64);
+        const atmosphereMaterial = new THREE.MeshBasicMaterial({ 
+            color: 0x87CEEB,
+            transparent: true,
+            opacity: 0.15
+        });
+        const atmosphere = new THREE.Mesh(atmosphereGeometry, atmosphereMaterial);
+        scene.add(atmosphere);
+        
+        // Add orbital rings for different satellite categories
+        const ringGeometry = new THREE.RingGeometry(3, 3.1, 64);
+        const ringMaterial = new THREE.MeshBasicMaterial({ 
+            color: 0x4ECDC4,
+            transparent: true,
+            opacity: 0.3,
+            side: THREE.DoubleSide
+        });
+        const leoRing = new THREE.Mesh(ringGeometry, ringMaterial);
+        leoRing.rotation.x = Math.PI / 2;
+        scene.add(leoRing);
+        
+        const meoRingGeometry = new THREE.RingGeometry(5, 5.1, 64);
+        const meoRingMaterial = new THREE.MeshBasicMaterial({ 
+            color: 0xFECA57,
+            transparent: true,
+            opacity: 0.2,
+            side: THREE.DoubleSide
+        });
+        const meoRing = new THREE.Mesh(meoRingGeometry, meoRingMaterial);
+        meoRing.rotation.x = Math.PI / 2;
+        scene.add(meoRing);
+        
+        const geoRingGeometry = new THREE.RingGeometry(8, 8.1, 64);
+        const geoRingMaterial = new THREE.MeshBasicMaterial({ 
+            color: 0x6C5CE7,
+            transparent: true,
+            opacity: 0.15,
+            side: THREE.DoubleSide
+        });
+        const geoRing = new THREE.Mesh(geoRingGeometry, geoRingMaterial);
+        geoRing.rotation.x = Math.PI / 2;
+        scene.add(geoRing);
+        
+        // NASA SSC Satellites (76 total)
+        const satellites = [
+            // LEO Satellites (12)
+            { id: 'iss', name: 'ISS', altitude: 408, color: 0x00FF00, size: 0.2, category: 'LEO' },
+            { id: 'hst', name: 'Hubble', altitude: 540, color: 0xFD79A8, size: 0.15, category: 'LEO' },
+            { id: 'landsat8', name: 'Landsat 8', altitude: 705, color: 0xE17055, size: 0.15, category: 'LEO' },
+            { id: 'aqua', name: 'Aqua', altitude: 705, color: 0x96CEB4, size: 0.15, category: 'LEO' },
+            { id: 'aura', name: 'Aura', altitude: 705, color: 0xFECA57, size: 0.15, category: 'LEO' },
+            { id: 'cassiope', name: 'CASSIOPE', altitude: 325, color: 0x54A0FF, size: 0.15, category: 'LEO' },
+            { id: 'aerocube6a', name: 'AEROCUBE-6A', altitude: 400, color: 0x4ECDC4, size: 0.1, category: 'LEO' },
+            { id: 'aerocube6b', name: 'AEROCUBE-6B', altitude: 400, color: 0x4ECDC4, size: 0.1, category: 'LEO' },
+            { id: 'gcomw1', name: 'GCOM-W1', altitude: 700, color: 0x0984E3, size: 0.15, category: 'LEO' },
+            { id: 'terra', name: 'Terra', altitude: 705, color: 0x00B894, size: 0.15, category: 'LEO' },
+            { id: 'dsxset', name: 'DSX-SET', altitude: 6000, color: 0xFF9F43, size: 0.15, category: 'LEO' },
+            
+            // MEO Satellites (18)
+            { id: 'cluster1', name: 'Cluster-1', altitude: 19000, color: 0x5F27CD, size: 0.1, category: 'MEO' },
+            { id: 'cluster3', name: 'Cluster-3', altitude: 19000, color: 0x5F27CD, size: 0.1, category: 'MEO' },
+            { id: 'cluster4', name: 'Cluster-4', altitude: 19000, color: 0x5F27CD, size: 0.1, category: 'MEO' },
+            { id: 'arase', name: 'Arase', altitude: 32000, color: 0x45B7D1, size: 0.1, category: 'MEO' },
+            { id: 'mms1', name: 'MMS-1', altitude: 25000, color: 0xFD79A8, size: 0.08, category: 'MEO' },
+            { id: 'mms2', name: 'MMS-2', altitude: 25000, color: 0xFD79A8, size: 0.08, category: 'MEO' },
+            { id: 'mms3', name: 'MMS-3', altitude: 25000, color: 0xFD79A8, size: 0.08, category: 'MEO' },
+            { id: 'mms4', name: 'MMS-4', altitude: 25000, color: 0xFD79A8, size: 0.08, category: 'MEO' },
+            { id: 'themis1', name: 'THEMIS-1', altitude: 30000, color: 0xFDCB6E, size: 0.08, category: 'MEO' },
+            { id: 'themis2', name: 'THEMIS-2', altitude: 30000, color: 0xFDCB6E, size: 0.08, category: 'MEO' },
+            { id: 'themis3', name: 'THEMIS-3', altitude: 30000, color: 0xFDCB6E, size: 0.08, category: 'MEO' },
+            { id: 'themis4', name: 'THEMIS-4', altitude: 30000, color: 0xFDCB6E, size: 0.08, category: 'MEO' },
+            { id: 'themis5', name: 'THEMIS-5', altitude: 30000, color: 0xFDCB6E, size: 0.08, category: 'MEO' },
+            { id: 'artemisp1pred', name: 'ARTEMIS P1', altitude: 150000, color: 0xFECA57, size: 0.1, category: 'MEO' },
+            { id: 'artemisp2pred', name: 'ARTEMIS P2', altitude: 150000, color: 0xFECA57, size: 0.1, category: 'MEO' },
+            { id: 'maven', name: 'MAVEN', altitude: 300000, color: 0x74B9FF, size: 0.1, category: 'MEO' },
+            { id: 'gatewayconc', name: 'Gateway', altitude: 380000, color: 0xEE5A24, size: 0.15, category: 'MEO' },
+            { id: 'bepicolombo', name: 'BepiColombo', altitude: 50000000, color: 0xFF9FF3, size: 0.08, category: 'MEO' },
+            
+            // GEO Satellites (3)
+            { id: 'goes18', name: 'GOES-18', altitude: 35800, color: 0x6C5CE7, size: 0.12, category: 'GEO' },
+            { id: 'goes19', name: 'GOES-19', altitude: 35800, color: 0x6C5CE7, size: 0.12, category: 'GEO' },
+            { id: 'gold', name: 'GOLD', altitude: 35800, color: 0xA29BFE, size: 0.1, category: 'GEO' },
+            { id: 'sdo', name: 'SDO', altitude: 35800, color: 0xE17055, size: 0.1, category: 'GEO' },
+            
+            // Deep Space (43)
+            { id: 'ace', name: 'ACE', altitude: 1480000, color: 0xFF6B6B, size: 0.06, category: 'Deep Space' },
+            { id: 'dscovr', name: 'DSCOVR', altitude: 1500000, color: 0x00D2D3, size: 0.06, category: 'Deep Space' },
+            { id: 'soho', name: 'SOHO', altitude: 1500000, color: 0x00CEC9, size: 0.06, category: 'Deep Space' },
+            { id: 'parker', name: 'Parker', altitude: 150000000, color: 0xFDCB6E, size: 0.05, category: 'Deep Space' },
+            { id: 'stereoa', name: 'STEREO-A', altitude: 150000000, color: 0x6C5CE7, size: 0.05, category: 'Deep Space' },
+            { id: 'stereob', name: 'STEREO-B', altitude: 150000000, color: 0x6C5CE7, size: 0.05, category: 'Deep Space' },
+            { id: 'juno', name: 'Juno', altitude: 500000000, color: 0xFDCB6E, size: 0.05, category: 'Deep Space' },
+            { id: 'osirisrex', name: 'OSIRIS-REx', altitude: 50000000, color: 0xE84393, size: 0.05, category: 'Deep Space' },
+            { id: 'newhorizons', name: 'New Horizons', altitude: 6000000000, color: 0x00B894, size: 0.04, category: 'Deep Space' },
+            { id: 'wind', name: 'Wind', altitude: 1000000, color: 0x00D2D3, size: 0.05, category: 'Deep Space' }
+        ];
+        
+        // Create satellite meshes
+        const satelliteMeshes = [];
+        const currentViewMode = { value: 'all' };
+        
+        satellites.forEach(satellite => {
+            // Calculate orbital position
+            const time = Date.now() / 1000;
+            const seed = satellite.id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+            
+            // Calculate orbital period (simplified)
+            const orbitalPeriod = Math.sqrt(Math.pow(6371 + satellite.altitude, 3)) / 1000;
+            const orbitPhase = (time % orbitalPeriod) / orbitalPeriod * Math.PI * 2;
+            
+            const inclination = (seed % 180) * Math.PI / 180;
+            const rightAscension = (seed * 137.5) % 360 * Math.PI / 180;
+            
+            // Scale altitude for visualization
+            const radius = 2 + (satellite.altitude / 10000);
+            
+            const x = radius * (Math.cos(orbitPhase) * Math.cos(rightAscension) - Math.sin(orbitPhase) * Math.cos(inclination) * Math.sin(rightAscension));
+            const y = radius * (Math.cos(orbitPhase) * Math.sin(rightAscension) + Math.sin(orbitPhase) * Math.cos(inclination) * Math.cos(rightAscension));
+            const z = radius * Math.sin(orbitPhase) * Math.sin(inclination);
+            
+            // Create satellite mesh with glow effect
+            const satelliteGeometry = new THREE.SphereGeometry(satellite.size, 12, 12);
+            const satelliteMaterial = new THREE.MeshBasicMaterial({ 
+                color: satellite.color,
+                emissive: satellite.color,
+                emissiveIntensity: 0.3
+            });
+            const satelliteMesh = new THREE.Mesh(satelliteGeometry, satelliteMaterial);
+            
+            // Add glow effect
+            const glowGeometry = new THREE.SphereGeometry(satellite.size * 2, 12, 12);
+            const glowMaterial = new THREE.MeshBasicMaterial({ 
+                color: satellite.color,
+                transparent: true,
+                opacity: 0.2
+            });
+            const glowMesh = new THREE.Mesh(glowGeometry, glowMaterial);
+            
+            // Create satellite group
+            const satelliteGroup = new THREE.Group();
+            satelliteGroup.add(satelliteMesh);
+            satelliteGroup.add(glowMesh);
+            
+            satelliteGroup.position.set(x, y, z);
+            satelliteGroup.userData = { satellite, orbitPhase, inclination, rightAscension, radius, seed };
+            satelliteGroup.visible = currentViewMode.value === 'all' || satellite.category === currentViewMode.value;
+            
+            // Add label
+            const labelGeometry = new THREE.PlaneGeometry(0.8, 0.2);
+            const labelMaterial = new THREE.MeshBasicMaterial({ 
+                color: 0xffffff,
+                transparent: true,
+                opacity: 0.9
+            });
+            const labelMesh = new THREE.Mesh(labelGeometry, labelMaterial);
+            labelMesh.position.set(0, satellite.size + 0.3, 0);
+            
+            // Add label text using canvas texture
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+            canvas.width = 256;
+            canvas.height = 64;
+            
+            context.fillStyle = 'rgba(0, 0, 0, 0.8)';
+            context.fillRect(0, 0, canvas.width, canvas.height);
+            
+            context.fillStyle = '#ffffff';
+            context.font = 'bold 24px Arial';
+            context.textAlign = 'center';
+            context.textBaseline = 'middle';
+            context.fillText(satellite.name, canvas.width / 2, canvas.height / 2);
+            
+            const labelTexture = new THREE.CanvasTexture(canvas);
+            const labelTextMaterial = new THREE.MeshBasicMaterial({ 
+                map: labelTexture,
+                transparent: true,
+                opacity: 0.9
+            });
+            const labelTextMesh = new THREE.Mesh(labelGeometry, labelTextMaterial);
+            labelTextMesh.position.set(0, satellite.size + 0.3, 0);
+            
+            satelliteGroup.add(labelTextMesh);
+            
+            scene.add(satelliteGroup);
+            satelliteMeshes.push(satelliteGroup);
+        });
+        
+        // Camera position
+        camera.position.set(0, 0, 15);
+        console.log('📷 Camera positioned at:', camera.position);
+        
+        // Add starfield background
+        const starsGeometry = new THREE.BufferGeometry();
+        const starsMaterial = new THREE.PointsMaterial({ color: 0xffffff, size: 0.5 });
+        
+        const starsVertices = [];
+        for (let i = 0; i < 1000; i++) {
+            const x = (Math.random() - 0.5) * 200;
+            const y = (Math.random() - 0.5) * 200;
+            const z = (Math.random() - 0.5) * 200;
+            starsVertices.push(x, y, z);
+        }
+        
+        starsGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starsVertices, 3));
+        const stars = new THREE.Points(starsGeometry, starsMaterial);
+        scene.add(stars);
+        console.log('⭐ Starfield added');
+        
+        // Animation loop
+        let frameCount = 0;
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            frameCount++;
+            if (frameCount % 60 === 0) { // Log every 60 frames (about once per second)
+                console.log('🎬 Animation frame:', frameCount);
+            }
+            
+            // Rotate Earth
+            earth.rotation.y += 0.001;
+            atmosphere.rotation.y += 0.0008;
+            
+            // Update satellite positions and animations
+            const time = Date.now() / 1000;
+            satelliteMeshes.forEach(mesh => {
+                if (mesh.visible) {
+                    const { satellite, seed } = mesh.userData;
+                    const orbitalPeriod = Math.sqrt(Math.pow(6371 + satellite.altitude, 3)) / 1000;
+                    const orbitPhase = (time % orbitalPeriod) / orbitalPeriod * Math.PI * 2;
+                    
+                    const inclination = (seed % 180) * Math.PI / 180;
+                    const rightAscension = (seed * 137.5) % 360 * Math.PI / 180;
+                    const radius = 2 + (satellite.altitude / 10000);
+                    
+                    const x = radius * (Math.cos(orbitPhase) * Math.cos(rightAscension) - Math.sin(orbitPhase) * Math.cos(inclination) * Math.sin(rightAscension));
+                    const y = radius * (Math.cos(orbitPhase) * Math.sin(rightAscension) + Math.sin(orbitPhase) * Math.cos(inclination) * Math.cos(rightAscension));
+                    const z = radius * Math.sin(orbitPhase) * Math.sin(inclination);
+                    
+                    mesh.position.set(x, y, z);
+                    
+                    // Pulsing animation
+                    const pulse = Math.sin(time * 2 + seed) * 0.1 + 1;
+                    mesh.scale.setScalar(pulse);
+                    
+                    // Make labels face camera
+                    mesh.children.forEach(child => {
+                        if (child.geometry && child.geometry.type === 'PlaneGeometry') {
+                            child.lookAt(camera.position);
+                        }
+                    });
+                }
+            });
+            
+            // Rotate orbital rings
+            leoRing.rotation.z += 0.002;
+            meoRing.rotation.z += 0.001;
+            geoRing.rotation.z += 0.0005;
+            
+            controls.update();
+            renderer.render(scene, camera);
+        }
+        
+        // View mode controls
+        function setViewMode(mode) {
+            currentViewMode.value = mode;
+            
+            // Update button states
+            document.querySelectorAll('.control-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Update satellite visibility
+            satelliteMeshes.forEach(mesh => {
+                const { satellite } = mesh.userData;
+                mesh.visible = mode === 'all' || satellite.category === mode;
+            });
+            
+            // Update info display
+            const visibleCount = satelliteMeshes.filter(mesh => mesh.visible).length;
+            document.getElementById('satelliteCount').textContent = visibleCount;
+            document.getElementById('viewMode').textContent = mode === 'all' ? 'All Satellites' : mode;
+        }
+        
+        function toggleAutoRotate() {
+            controls.autoRotate = !controls.autoRotate;
+            event.target.textContent = controls.autoRotate ? 'Stop Auto-Rotate' : 'Toggle Auto-Rotate';
+        }
+        
+        function resetCamera() {
+            camera.position.set(0, 0, 15);
+            controls.reset();
+        }
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+        
+        // Start animation
+        animate();
+    </script>
+</body>
+</html>
